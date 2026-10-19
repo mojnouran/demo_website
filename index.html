@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  QUICK EDITS
+  1. Company name: find and replace "Helix Autonomy" (also in <title> and footer)
+  2. Email: find and replace "hello@example.com" with your real address
+  3. Domain: find and replace "example.com" once you have it
+-->
+<title>Helix Autonomy | Drones and field robots</title>
+<meta name="description" content="Helix Autonomy designs drones, ground robots and autonomy software for inspection, mapping and field work.">
+<meta property="og:title" content="Helix Autonomy">
+<meta property="og:description" content="Drones, ground robots and autonomy software for inspection, mapping and field work.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,700;112,800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky:#E6EEF4;
+    --white:#FFFFFF;
+    --ink:#13233A;
+    --slate:#4A5B70;
+    --line:#C3D0DC;
+    --signal:#F5B700;
+    --gcs:#0F1E33;
+    --gcs-line:#29405E;
+    --head:"Archivo", system-ui, sans-serif;
+    --body:"Source Sans 3", system-ui, sans-serif;
+    --max:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--sky);color:var(--ink);font:400 1.0625rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+  img,svg{display:block;max-width:100%}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--signal);outline-offset:3px;border-radius:2px}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:var(--head);font-stretch:112%;line-height:1.08;margin:0}
+  h1{font-weight:800;font-size:clamp(2.4rem,5.4vw,4.1rem);letter-spacing:-.02em}
+  h2{font-weight:800;font-size:clamp(1.8rem,3.4vw,2.5rem);letter-spacing:-.015em}
+  h3{font-weight:700;font-size:1.25rem}
+  p{margin:0}
+
+  /* header */
+  header{position:sticky;top:0;z-index:10;background:rgba(230,238,244,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 1.15rem var(--head);font-stretch:112%}
+  nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+  nav a{text-decoration:none;color:var(--slate);font-weight:600}
+  nav a:hover{color:var(--ink)}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:6px;padding:8px 12px;font:600 1rem var(--body);color:var(--ink)}
+
+  /* buttons */
+  .btn{display:inline-block;text-decoration:none;font-weight:600;padding:13px 22px;border-radius:6px;border:2px solid var(--ink)}
+  .btn-main{background:var(--signal);border-color:var(--signal);color:var(--ink)}
+  .btn-main:hover{background:#E0A600;border-color:#E0A600}
+  .btn-line:hover{background:var(--ink);color:var(--white)}
+
+  /* hero */
+  .hero{padding:72px 0 88px}
+  .hero-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
+  .hero p.lead{margin-top:22px;font-size:1.2rem;color:var(--slate);max-width:34ch}
+  .hero .actions{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+
+  .gcs{background:var(--gcs);border-radius:14px;padding:14px;box-shadow:0 30px 60px -30px rgba(15,30,51,.55)}
+  .gcs-top{display:flex;justify-content:space-between;color:#9FB3CB;font:600 .85rem var(--body);padding:2px 6px 12px}
+  .gcs-top .live{display:flex;align-items:center;gap:7px}
+  .gcs-top .dot{width:8px;height:8px;border-radius:50%;background:#46D17E}
+  .gcs-map{border-radius:8px;overflow:hidden;background:#13284A}
+  .readouts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:12px;background:var(--gcs-line);border-radius:8px;overflow:hidden}
+  .readouts div{background:var(--gcs);padding:10px 12px}
+  .readouts span{display:block;color:#8297B0;font-size:.8rem}
+  .readouts strong{display:block;color:#EAF1F8;font:700 1.15rem var(--head);font-stretch:100%;font-variant-numeric:tabular-nums}
+
+  /* sections */
+  section{padding:96px 0}
+  .white{background:var(--white)}
+  .intro{max-width:46ch;margin-top:16px;color:var(--slate);font-size:1.15rem}
+
+  /* what we build: rows, not cards */
+  .build{margin-top:48px;border-top:2px solid var(--ink)}
+  .build-row{display:grid;grid-template-columns:220px 1fr 1fr;gap:32px;padding:32px 0;border-bottom:1px solid var(--line)}
+  .build-row svg{width:120px;height:72px}
+  .build-row p{color:var(--slate)}
+  .specs{list-style:none;margin:0;padding:0;font-size:.98rem}
+  .specs li{padding:4px 0;border-bottom:1px dashed var(--line)}
+  .specs li:last-child{border-bottom:0}
+
+  /* process: a real sequence */
+  .steps{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:step;position:relative}
+  .step{padding:0 24px 0 0;position:relative}
+  .step::before{counter-increment:step;content:counter(step);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--white);font:800 1.1rem var(--head);margin-bottom:20px;position:relative;z-index:1}
+  .step::after{content:"";position:absolute;top:22px;left:44px;right:0;height:2px;background:var(--line)}
+  .step:last-child::after{display:none}
+  .step h3{margin-bottom:8px}
+  .step p{color:var(--slate)}
+
+  /* sectors */
+  .sectors{margin-top:40px;display:flex;flex-wrap:wrap;gap:12px}
+  .sectors li{list-style:none;padding:12px 18px;border:1.5px solid var(--ink);border-radius:999px;font-weight:600}
+  .sectors{padding:0}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .about-grid p + p{margin-top:16px}
+  .about-grid .col p{color:var(--slate)}
+
+  /* contact */
+  .contact{background:var(--ink);color:var(--white)}
+  .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:end}
+  .contact p{color:#B8C6D6;margin-top:16px;max-width:42ch}
+  .mail{display:inline-block;margin-top:28px;font:700 clamp(1.3rem,3vw,2rem) var(--head);font-stretch:100%;color:var(--signal);text-decoration:none;border-bottom:2px solid var(--signal);word-break:break-all}
+  .mail:hover{color:var(--white);border-color:var(--white)}
+  .contact dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 24px}
+  .contact dt{color:#8FA3BA}
+  .contact dd{margin:0}
+
+  footer{background:var(--ink);color:#8FA3BA;border-top:1px solid #263A55;padding:28px 0;font-size:.95rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  /* responsive */
+  @media (max-width:900px){
+    .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+    .build-row{grid-template-columns:1fr;gap:16px}
+    .steps{grid-template-columns:1fr 1fr;gap:40px 0}
+    .step::after{display:none}
+  }
+  @media (max-width:640px){
+    .menu-btn{display:block}
+    nav ul{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--sky);border-bottom:1px solid var(--line);padding:8px 24px}
+    nav ul.open{display:flex}
+    nav li a{display:block;padding:12px 0}
+    .wrap{padding:0 16px}
+    section{padding:72px 0}
+    .hero{padding:48px 0 64px}
+    .steps{grid-template-columns:1fr}
+    .readouts{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Helix Autonomy home">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><use href="#mark"/></svg>
+      Helix Autonomy
+    </a>
+    <nav aria-label="Main">
+      <button class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+      <ul id="menu">
+        <li><a href="#build">What we build</a></li>
+        <li><a href="#process">How we work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- shared logo mark -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 32 32">
+    <rect width="32" height="32" rx="7" fill="#13233A"/>
+    <path d="M9 9 L23 23 M23 9 L9 23" stroke="#E6EEF4" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="9" cy="9" r="4" fill="none" stroke="#F5B700" stroke-width="2"/>
+    <circle cx="23" cy="9" r="4" fill="none" stroke="#F5B700" stroke-width="2"/>
+    <circle cx="9" cy="23" r="4" fill="none" stroke="#F5B700" stroke-width="2"/>
+    <circle cx="23" cy="23" r="4" fill="none" stroke="#F5B700" stroke-width="2"/>
+  </symbol>
+</svg>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Drones and robots that do the field work for you.</h1>
+        <p class="lead">We design aerial and ground robots with their own autonomy software, built for inspection, mapping and survey jobs.</p>
+        <div class="actions">
+          <a class="btn btn-main" href="#contact">Talk to our team</a>
+          <a class="btn btn-line" href="#build">See what we build</a>
+        </div>
+      </div>
+
+      <div class="gcs" aria-label="Animated example of a drone flying a survey pattern over a field">
+        <div class="gcs-top">
+          <span>Mission: field survey</span>
+          <span class="live"><span class="dot"></span>Autonomous</span>
+        </div>
+        <div class="gcs-map">
+          <svg id="mapsvg" viewBox="0 0 560 340" role="img" aria-label="Map with a drone following a back-and-forth survey path">
+            <defs>
+              <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+                <path d="M28 0H0V28" fill="none" stroke="#1E3A60" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="560" height="340" fill="url(#grid)"/>
+            <!-- terrain -->
+            <path d="M0 250 C90 220 150 270 250 240 S420 200 560 230 V340 H0Z" fill="#183457"/>
+            <path d="M330 0 C350 60 300 120 340 190 S420 300 400 340" fill="none" stroke="#2C5A8C" stroke-width="10" stroke-linecap="round" opacity=".7"/>
+            <!-- survey area -->
+            <rect x="60" y="50" width="440" height="240" fill="none" stroke="#6F8BAD" stroke-width="1.5" stroke-dasharray="6 6"/>
+            <!-- planned path (faint) -->
+            <path id="plan" d="M80 70 H480 V118 H80 V166 H480 V214 H80 V262 H480" fill="none" stroke="#3E5C82" stroke-width="2"/>
+            <!-- flown path (draws in) -->
+            <path id="flown" d="M80 70 H480 V118 H80 V166 H480 V214 H80 V262 H480" fill="none" stroke="#F5B700" stroke-width="3" stroke-linejoin="round"/>
+            <!-- home point -->
+            <g transform="translate(80 70)">
+              <circle r="9" fill="none" stroke="#46D17E" stroke-width="2"/>
+              <text x="14" y="-10" fill="#9FB3CB" font-size="12" font-family="Source Sans 3, sans-serif">Launch</text>
+            </g>
+            <!-- drone -->
+            <g id="drone">
+              <circle r="22" fill="#F5B700" opacity=".14"/>
+              <path d="M-11 -11 L11 11 M11 -11 L-11 11" stroke="#EAF1F8" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="-11" cy="-11" r="6" fill="none" stroke="#EAF1F8" stroke-width="1.6"/>
+              <circle cx="11" cy="-11" r="6" fill="none" stroke="#EAF1F8" stroke-width="1.6"/>
+              <circle cx="-11" cy="11" r="6" fill="none" stroke="#EAF1F8" stroke-width="1.6"/>
+              <circle cx="11" cy="11" r="6" fill="none" stroke="#EAF1F8" stroke-width="1.6"/>
+              <rect x="-5" y="-5" width="10" height="10" rx="2" fill="#F5B700"/>
+            </g>
+          </svg>
+        </div>
+        <div class="readouts" aria-live="off">
+          <div><span>Altitude</span><strong>60 m</strong></div>
+          <div><span>Speed</span><strong>8.0 m/s</strong></div>
+          <div><span>Coverage</span><strong id="cov">0%</strong></div>
+          <div><span>Battery</span><strong id="bat">98%</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT WE BUILD -->
+  <section id="build" class="white">
+    <div class="wrap">
+      <h2>What we build</h2>
+      <p class="intro">Hardware and software made to work together, so one team owns the whole system from the airframe to the flight logs.</p>
+
+      <div class="build">
+        <div class="build-row">
+          <svg viewBox="0 0 120 72" aria-hidden="true">
+            <path d="M30 22 L90 50 M90 22 L30 50" stroke="#13233A" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="30" cy="22" rx="18" ry="5" fill="none" stroke="#13233A" stroke-width="2.5"/>
+            <ellipse cx="90" cy="22" rx="18" ry="5" fill="none" stroke="#13233A" stroke-width="2.5"/>
+            <ellipse cx="30" cy="50" rx="18" ry="5" fill="none" stroke="#13233A" stroke-width="2.5"/>
+            <ellipse cx="90" cy="50" rx="18" ry="5" fill="none" stroke="#13233A" stroke-width="2.5"/>
+            <rect x="50" y="28" width="20" height="16" rx="3" fill="#F5B700" stroke="#13233A" stroke-width="2.5"/>
+          </svg>
+          <div>
+            <h3>Inspection drones</h3>
+            <p style="margin-top:8px">Multirotor drones that fly close to bridges, towers and roofs and bring back clear images and 3D models.</p>
+          </div>
+          <ul class="specs">
+            <li>Planned flights with obstacle avoidance</li>
+            <li>Camera, thermal and lidar payloads</li>
+            <li>Works with or without GPS</li>
+          </ul>
+        </div>
+
+        <div class="build-row">
+          <svg viewBox="0 0 120 72" aria-hidden="true">
+            <rect x="22" y="22" width="76" height="26" rx="5" fill="#F5B700" stroke="#13233A" stroke-width="2.5"/>
+            <rect x="48" y="10" width="24" height="12" rx="2" fill="none" stroke="#13233A" stroke-width="2.5"/>
+            <circle cx="36" cy="54" r="10" fill="#E6EEF4" stroke="#13233A" stroke-width="2.5"/>
+            <circle cx="84" cy="54" r="10" fill="#E6EEF4" stroke="#13233A" stroke-width="2.5"/>
+          </svg>
+          <div>
+            <h3>Ground robots</h3>
+            <p style="margin-top:8px">Wheeled robots for sites where a person should not have to walk every day, like solar farms, plants and campuses.</p>
+          </div>
+          <ul class="specs">
+            <li>Repeatable patrol routes</li>
+            <li>Sensor fusion for rough terrain</li>
+            <li>Remote takeover at any time</li>
+          </ul>
+        </div>
+
+        <div class="build-row">
+          <svg viewBox="0 0 120 72" aria-hidden="true">
+            <rect x="20" y="10" width="80" height="52" rx="5" fill="none" stroke="#13233A" stroke-width="2.5"/>
+            <path d="M30 46 L48 30 L62 40 L82 22" fill="none" stroke="#F5B700" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="82" cy="22" r="4" fill="#13233A"/>
+          </svg>
+          <div>
+            <h3>Autonomy software</h3>
+            <p style="margin-top:8px">The planning, control and perception stack that runs on our robots, also available for your own vehicles.</p>
+          </div>
+          <ul class="specs">
+            <li>Path planning and tracking control</li>
+            <li>Multi-drone missions</li>
+            <li>Simulation before every field test</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="wrap">
+      <h2>How a project runs</h2>
+      <p class="intro">Every robot is tested in simulation and in the field before it goes to work for you.</p>
+      <div class="steps">
+        <div class="step">
+          <h3>Scope</h3>
+          <p>We visit the site, learn the job, and agree on what the robot must measure or deliver.</p>
+        </div>
+        <div class="step">
+          <h3>Simulate</h3>
+          <p>We model the vehicle and the site, then tune the controller and mission plan on a computer first.</p>
+        </div>
+        <div class="step">
+          <h3>Field test</h3>
+          <p>We fly or drive the real system at your site with your team, and adjust from real data.</p>
+        </div>
+        <div class="step">
+          <h3>Deploy</h3>
+          <p>You get the robot, the software, training and support, with logs from every mission.</p>
+        </div>
+      </div>
+
+      <h2 style="margin-top:96px">Where our robots work</h2>
+      <ul class="sectors">
+        <li>Bridges and infrastructure</li>
+        <li>Energy and utilities</li>
+        <li>Agriculture</li>
+        <li>Construction sites</li>
+        <li>Public safety</li>
+        <li>Research labs</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="white">
+    <div class="wrap about-grid">
+      <h2>Built by people who write the control code themselves.</h2>
+      <div class="col">
+        <p>Helix Autonomy is a robotics company focused on drones, ground robots and the software that lets them work on their own.</p>
+        <p>Our team comes from research in control systems, sensor fusion and machine learning for robots. We bring that work out of the lab and into real job sites.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2>Have a site that needs a robot?</h2>
+        <p>Tell us about the job, the place and the timeline. We reply within two business days.</p>
+        <a class="mail" href="mailto:hello@example.com?subject=Project%20inquiry">hello@example.com</a>
+      </div>
+      <dl>
+        <dt>Location</dt><dd>Connecticut, USA</dd>
+        <dt>General</dt><dd><a href="mailto:hello@example.com">hello@example.com</a></dd>
+        <dt>Careers</dt><dd><a href="mailto:careers@example.com">careers@example.com</a></dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="yr">2026</span> Helix Autonomy</span>
+    <span>example.com</span>
+  </div>
+</footer>
+
+<script>
+  // mobile menu
+  const btn = document.querySelector('.menu-btn');
+  const menu = document.getElementById('menu');
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
+  }));
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // hero survey animation
+  const path = document.getElementById('flown');
+  const drone = document.getElementById('drone');
+  const cov = document.getElementById('cov');
+  const bat = document.getElementById('bat');
+  const len = path.getTotalLength();
+  path.style.strokeDasharray = len;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DURATION = 22000, PAUSE = 2500;
+
+  function draw(t){
+    const p = Math.min(t, 1);
+    const pt = path.getPointAtLength(p * len);
+    const ahead = path.getPointAtLength(Math.min(p * len + 1, len));
+    const angle = Math.atan2(ahead.y - pt.y, ahead.x - pt.x) * 180 / Math.PI;
+    path.style.strokeDashoffset = len * (1 - p);
+    drone.setAttribute('transform', `translate(${pt.x} ${pt.y}) rotate(${angle + 45})`);
+    cov.textContent = Math.round(p * 100) + '%';
+    bat.textContent = Math.round(98 - p * 31) + '%';
+  }
+
+  if (reduce) {
+    draw(0.62);
+  } else {
+    let start = null;
+    function frame(now){
+      if (start === null) start = now;
+      const e = (now - start) % (DURATION + PAUSE);
+      draw(e / DURATION);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+</script>
+</body>
+</html>
