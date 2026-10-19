@@ -1,4 +1,4 @@
-# Helix Autonomy website (placeholder name)
+# AIXAutonomy website
 
 A static site. No build step, no framework. Files:
 
@@ -11,11 +11,8 @@ Find and replace in `index.html`:
 
 | Find | Replace with |
 |---|---|
-| `Helix Autonomy` | your company name |
-| `hello@example.com` | your company email |
-| `careers@example.com` | a second address, or delete that line |
-| `example.com` | your domain |
-| `Connecticut, USA` | your company location |
+| `Texas, USA` | change if you list a different location |
+| `reza@aixautonomy.com` | change if the address changes |
 
 ## Deploy on Vercel
 
