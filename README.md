@@ -11,7 +11,6 @@ Find and replace in `index.html`:
 
 | Find | Replace with |
 |---|---|
-| `Texas, USA` | change if you list a different location |
 | `rpirayeshs@gmail.com` | change when the company email exists |
 
 ## Deploy on Vercel

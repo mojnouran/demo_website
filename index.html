@@ -8,10 +8,10 @@
   Email: find and replace "rpirayeshs@gmail.com"
   Photos: see images/README.txt
 -->
-<title>AIXAutonomy | Physical AI and hardware connection</title>
-<meta name="description" content="AIXAutonomy builds physical AI for drones, aircraft and humanoids, and the hardware connection layer that lets the AI write drivers, identify the machine and debug it.">
+<title>AIXAutonomy | Physical AI for drones, aircraft, cars and humanoids</title>
+<meta name="description" content="AIXAutonomy builds physical AI for drones, aircraft, autonomous cars and humanoids, and the hardware connection layer that lets the AI write drivers, identify the machine and debug it.">
 <meta property="og:title" content="AIXAutonomy">
-<meta property="og:description" content="Physical AI for drones, aircraft and humanoids, connected to the hardware.">
+<meta property="og:description" content="Physical AI for drones, aircraft, cars and humanoids, connected to the hardware.">
 <meta property="og:type" content="website">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -146,14 +146,14 @@
   .specs li:last-child{border-bottom:0}
 
   /* platforms */
-  .platforms{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-  .platforms{gap:24px}
-  .platform{position:relative;border-radius:14px;overflow:hidden;background:var(--gcs);aspect-ratio:4/5;color:var(--white)}
+  .platforms{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  .platforms{gap:20px}
+  .platform{position:relative;border-radius:14px;overflow:hidden;background:var(--gcs);aspect-ratio:3/4;color:var(--white)}
   .platform img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .platform .fallback{position:absolute;inset:0;display:grid;place-items:center;color:var(--signal)}
+  .platform .fallback{position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-start;padding-top:22%;color:var(--signal)}
   .platform .fallback svg{width:96px;height:96px}
   .platform.has-img .fallback{display:none}
-  .platform .cap{position:absolute;left:0;right:0;bottom:0;padding:120px 24px 24px;background:linear-gradient(to top,rgba(10,23,41,.95) 0%,rgba(10,23,41,.6) 55%,transparent 100%)}
+  .platform .cap{position:absolute;left:0;right:0;bottom:0;padding:120px 20px 20px;background:linear-gradient(to top,rgba(10,23,41,.95) 0%,rgba(10,23,41,.6) 55%,transparent 100%)}
   .platform .cap h3{color:var(--white)}
   .platform .cap p{color:#C9D6E4;margin-top:6px}
   .photo-note{margin-top:20px;color:var(--slate);font-size:.95rem}
@@ -196,8 +196,7 @@
     .hero-grid,.about-grid,.contact-grid,.diff,.hw-grid,.feats{grid-template-columns:1fr;gap:40px}
     .feats{gap:24px}
     .build-row{grid-template-columns:1fr;gap:16px}
-    .platforms{grid-template-columns:1fr;gap:20px}
-    .platform{aspect-ratio:3/2}
+    .platforms{grid-template-columns:1fr 1fr;gap:20px}
     .steps{grid-template-columns:1fr 1fr;gap:40px 0}
     .step::after{display:none}
   }
@@ -210,6 +209,8 @@
     section{padding:72px 0}
     .hero{padding:48px 0 64px}
     .steps{grid-template-columns:1fr}
+    .platforms{grid-template-columns:1fr}
+    .platform{aspect-ratio:3/2}
     .stages{grid-template-columns:repeat(2,1fr)}
     .log{font-size:.78rem;height:280px}
   }
@@ -257,6 +258,7 @@
   <symbol id="i-cpu" viewBox="0 0 24 24"><path d="M5 6a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -12"/><path d="M9 9h6v6h-6l0 -6"/><path d="M3 10h2"/><path d="M3 14h2"/><path d="M10 3v2"/><path d="M14 3v2"/><path d="M21 10h-2"/><path d="M21 14h-2"/><path d="M14 21v-2"/><path d="M10 21v-2"/></symbol>
   <symbol id="i-brain" viewBox="0 0 24 24"><path d="M15.5 13a3.5 3.5 0 0 0 -3.5 3.5v1a3.5 3.5 0 0 0 7 0v-1.8"/><path d="M8.5 13a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1 -7 0v-1.8"/><path d="M17.5 16a3.5 3.5 0 0 0 0 -7h-.5"/><path d="M19 9.3v-2.8a3.5 3.5 0 0 0 -7 0"/><path d="M6.5 16a3.5 3.5 0 0 1 0 -7h.5"/><path d="M5 9.3v-2.8a3.5 3.5 0 0 1 7 0v10"/></symbol>
   <symbol id="i-motor" viewBox="0 0 24 24"><path d="M5 12a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M5 12h-3"/><path d="M19 12h3"/><path d="M10 14v-4l2 2l2 -2v4"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"/></symbol>
   <symbol id="i-tool" viewBox="0 0 24 24"><path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5"/></symbol>
 </svg>
 
@@ -266,7 +268,7 @@
   <div class="hero">
     <div class="wrap hero-grid">
       <div>
-        <h1>Physical AI for drones, aircraft and humanoids.</h1>
+        <h1>Physical AI for drones, aircraft, cars and humanoids.</h1>
         <p class="lead">One general AI that plans, perceives and controls real machines. It is connected to the hardware it runs on, so it can build, identify and debug the robot itself.</p>
         <div class="actions">
           <a class="btn btn-main" href="#contact">Talk to our team</a>
@@ -302,6 +304,14 @@
           <div class="cap">
             <h3>Aircraft</h3>
             <p>Fixed wing and eVTOL vehicles, where identification and fault handling matter most.</p>
+          </div>
+        </div>
+        <div class="platform" data-img="images/car.jpg">
+          <img alt="Autonomous cars" hidden>
+          <div class="fallback"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-car"/></svg></div>
+          <div class="cap">
+            <h3>Autonomous cars</h3>
+            <p>Road and off-road vehicles, from campus shuttles to research platforms.</p>
           </div>
         </div>
         <div class="platform" data-img="images/humanoid.jpg">
@@ -453,7 +463,7 @@
         </div>
         <div class="step">
           <h3>Field test</h3>
-          <p>We fly or walk the real system at your site with your team, and the AI adjusts from real data.</p>
+          <p>We fly, drive or walk the real system at your site with your team, and the AI adjusts from real data.</p>
         </div>
         <div class="step">
           <h3>Deploy</h3>
@@ -471,7 +481,6 @@
       <div class="col">
         <p>AIXAutonomy is a physical AI company. We build general AI for robots that is connected to the hardware, so the AI can build, identify and debug the machine it runs on.</p>
         <p>Our team comes from research in control systems, sensor fusion and machine learning for drones, spacecraft and underwater robots. We bring that work out of the lab and into real vehicles.</p>
-        <p>AIXAutonomy LLC was founded in 2026 in Texas by Reza Pirayesh, PhD in mechanical engineering, whose earlier work includes control and sensor fusion for underwater robots at Texas A&amp;M and spacecraft formation control with NASA.</p>
       </div>
     </div>
     </div>
@@ -487,7 +496,6 @@
       </div>
       <dl>
         <dt>Company</dt><dd>AIXAutonomy LLC</dd>
-        <dt>Registered in</dt><dd>Texas, USA</dd>
         <dt>Email</dt><dd><a href="mailto:rpirayeshs@gmail.com">rpirayeshs@gmail.com</a></dd>
       </dl>
     </div>
