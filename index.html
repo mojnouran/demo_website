@@ -5,14 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
   QUICK EDITS
-  1. Company name: AIXAutonomy (legal name AIXAutonomy LLC, in the footer)
-  2. Email: find and replace "reza@aixautonomy.com" with your real address
-  3. Domain: find and replace "example.com" once you have it
+  Email: find and replace "rpirayeshs@gmail.com"
+  Photos: see images/README.txt
 -->
-<title>AIXAutonomy | Physical AI that connects to the hardware</title>
-<meta name="description" content="AIXAutonomy builds general AI for physical robots. It connects directly to drones, aircraft and humanoids, writes its own drivers, identifies the system and debugs itself.">
+<title>AIXAutonomy | Physical AI and hardware connection</title>
+<meta name="description" content="AIXAutonomy builds physical AI for drones, aircraft and humanoids, and the hardware connection layer that lets the AI write drivers, identify the machine and debug it.">
 <meta property="og:title" content="AIXAutonomy">
-<meta property="og:description" content="Physical AI that connects to the hardware. For drones, aircraft and humanoids.">
+<meta property="og:description" content="Physical AI for drones, aircraft and humanoids, connected to the hardware.">
 <meta property="og:type" content="website">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -93,6 +92,27 @@
   .cap-ic{width:88px;height:88px;color:var(--ink);padding:16px;background:var(--white);border:1.5px solid var(--line);border-radius:12px}
   .cap-ic.hi{color:var(--signal);background:var(--ink);border-color:var(--ink)}
   .box .ic{width:22px;height:22px;vertical-align:-5px;margin-right:8px}
+  /* hero photo panel */
+  .hero-photo{position:relative;border-radius:14px;overflow:hidden;background:var(--gcs);aspect-ratio:4/3;box-shadow:0 30px 60px -30px rgba(15,30,51,.55)}
+  .hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero-photo .fallback{position:absolute;inset:0;display:grid;place-items:center;color:var(--signal)}
+  .hero-photo .fallback svg{width:120px;height:120px}
+  .hero-photo.has-img .fallback{display:none}
+  .hero-photo .tag{position:absolute;left:16px;bottom:16px;background:rgba(10,23,41,.85);color:#EAF1F8;padding:8px 12px;border-radius:6px;font:600 .85rem var(--body)}
+  /* offering header */
+  .offer{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .offer .num{font:800 .95rem var(--head);color:var(--white);background:var(--ink);padding:4px 10px;border-radius:6px}
+  .white .offer .num{background:var(--signal);color:var(--ink)}
+  /* two-column feature list */
+  .feats{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}
+  .feat{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start}
+  .feat svg{width:52px;height:52px;padding:12px;color:var(--ink);background:var(--white);border:1.5px solid var(--line);border-radius:10px}
+  .feat p{color:var(--slate);margin-top:4px}
+  /* hardware section band */
+  .hw-grid{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .hw-grid .pitch p{color:var(--slate);margin-top:14px}
+  .hw-grid .pitch p strong{color:var(--ink)}
+  .hw-grid .log{font-size:.78rem;height:330px}
   /* sections */
   section{padding:96px 0}
   .white{background:var(--white)}
@@ -173,7 +193,8 @@
 
   /* responsive */
   @media (max-width:900px){
-    .hero-grid,.about-grid,.contact-grid,.diff{grid-template-columns:1fr;gap:40px}
+    .hero-grid,.about-grid,.contact-grid,.diff,.hw-grid,.feats{grid-template-columns:1fr;gap:40px}
+    .feats{gap:24px}
     .build-row{grid-template-columns:1fr;gap:16px}
     .platforms{grid-template-columns:1fr;gap:20px}
     .platform{aspect-ratio:3/2}
@@ -206,9 +227,9 @@
     <nav aria-label="Main">
       <button class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
       <ul id="menu">
-        <li><a href="#difference">The difference</a></li>
-        <li><a href="#capabilities">What it does</a></li>
-        <li><a href="#platforms">Platforms</a></li>
+        <li><a href="#physical-ai">Physical AI</a></li>
+        <li><a href="#hardware">Hardware connection</a></li>
+        <li><a href="#process">How we work</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -241,144 +262,31 @@
 
 <main id="top">
 
-  <!-- HERO -->
+  <!-- HERO: Physical AI -->
   <div class="hero">
     <div class="wrap hero-grid">
       <div>
-        <h1>Physical AI that connects to the hardware.</h1>
-        <p class="lead">General AI for drones, aircraft and humanoids. It talks to the motors and sensors directly, writes its own drivers, identifies the machine and debugs it.</p>
+        <h1>Physical AI for drones, aircraft and humanoids.</h1>
+        <p class="lead">One general AI that plans, perceives and controls real machines. It is connected to the hardware it runs on, so it can build, identify and debug the robot itself.</p>
         <div class="actions">
           <a class="btn btn-main" href="#contact">Talk to our team</a>
-          <a class="btn btn-line" href="#difference">See the difference</a>
+          <a class="btn btn-line" href="#hardware">Hardware connection</a>
         </div>
       </div>
-
-      <div class="console" aria-label="Example log of the AI bringing up a new drone on its own">
-        <div class="console-top">
-          <span>New vehicle: quadrotor, unknown hardware</span>
-          <span class="live"><span class="dot"></span>AI online</span>
-        </div>
-        <div class="log" id="log" aria-live="off"></div>
-        <div class="stages" id="stages">
-          <div>Connect</div>
-          <div>Drivers</div>
-          <div>Identify</div>
-          <div>Fly</div>
-        </div>
+      <div class="hero-photo" data-img="images/lab.jpg">
+        <img alt="A quadrotor drone in flight" hidden>
+        <div class="fallback"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-drone"/></svg></div>
+        <span class="tag">Flight test</span>
       </div>
     </div>
   </div>
 
-  <!-- THE DIFFERENCE -->
-  <section id="difference" class="white">
+  <!-- 1. PHYSICAL AI -->
+  <section id="physical-ai" class="white">
     <div class="wrap">
-      <h2>No layer in between</h2>
-      <p class="intro">Most physical AI sits on top of an integration layer that someone has to write by hand for every robot. Ours is connected to the hardware itself.</p>
+      <div class="offer"><span class="num">1</span><h2>Physical AI</h2></div>
+      <p class="intro">A general AI brain for physical robots. The same model moves between vehicles because it learns each machine from the hardware up.</p>
 
-      <div class="diff">
-        <div class="diff-col">
-          <h3>The usual approach</h3>
-          <p class="sub">The AI only sees what the middle layer gives it.</p>
-          <div class="stack">
-            <div class="box ai"><svg class="ic" aria-hidden="true"><use href="#i-brain"/></svg>AI model</div>
-            <div class="arrow"></div>
-            <div class="box mid"><svg class="ic" aria-hidden="true"><use href="#i-tool"/></svg>Hand-written integration layer</div>
-            <div class="arrow"></div>
-            <div class="box hw"><svg class="ic" aria-hidden="true"><use href="#i-motor"/></svg>Motors, sensors, boards</div>
-          </div>
-          <ul>
-            <li>Engineers write drivers and interfaces for every new robot</li>
-            <li>Hardware problems are hidden from the AI</li>
-            <li>Moving to a new vehicle means starting the layer again</li>
-          </ul>
-        </div>
-
-        <div class="diff-col ours">
-          <h3>Our approach</h3>
-          <p class="sub">The AI is connected to the hardware and can build it.</p>
-          <div class="stack">
-            <div class="box ai"><svg class="ic" aria-hidden="true"><use href="#i-brain"/></svg>AI model</div>
-            <div class="arrow two"></div>
-            <div class="box hw"><svg class="ic" aria-hidden="true"><use href="#i-motor"/></svg>Motors, sensors, boards</div>
-          </div>
-          <ul>
-            <li>Writes and tests its own drivers for new parts</li>
-            <li>Runs system identification to learn how the machine moves</li>
-            <li>Finds and fixes hardware and software faults itself</li>
-            <li>Moves to a new vehicle without a new integration project</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CAPABILITIES -->
-  <section id="capabilities">
-    <div class="wrap">
-      <h2>What the AI does on the machine</h2>
-      <p class="intro">The jobs that normally need a robotics engineer in the loop, done by the AI with direct access to the hardware.</p>
-
-      <div class="build">
-        <div class="build-row">
-          <svg class="ic ic-lg cap-ic" aria-hidden="true"><use href="#i-file-code"/></svg>
-          <div>
-            <h3>Builds the drivers</h3>
-            <p>Give it a new motor controller, camera or IMU and it writes the driver, tests it on the bench and keeps it.</p>
-          </div>
-          <ul class="specs">
-            <li>Reads datasheets and protocols</li>
-            <li>Writes, compiles and tests driver code</li>
-            <li>Works with common boards and buses</li>
-          </ul>
-        </div>
-
-        <div class="build-row">
-          <svg class="ic ic-lg cap-ic" aria-hidden="true"><use href="#i-function"/></svg>
-          <div>
-            <h3>Identifies the system</h3>
-            <p>It runs its own experiments to learn mass, inertia, motor response and delays, then builds a model it can control.</p>
-          </div>
-          <ul class="specs">
-            <li>Automatic test signals and data capture</li>
-            <li>Model fitting and validation</li>
-            <li>Controller tuning from the fitted model</li>
-          </ul>
-        </div>
-
-        <div class="build-row">
-          <svg class="ic ic-lg cap-ic hi" aria-hidden="true"><use href="#i-bug"/></svg>
-          <div>
-            <h3>Debugs itself</h3>
-            <p>When a sensor drifts, a motor stalls or a cable is wrong, the AI sees it in the raw data and works out the cause.</p>
-          </div>
-          <ul class="specs">
-            <li>Fault detection from raw signals</li>
-            <li>Root cause with a plain explanation</li>
-            <li>Safe fallback while it fixes the problem</li>
-          </ul>
-        </div>
-
-        <div class="build-row">
-          <svg class="ic ic-lg cap-ic" aria-hidden="true"><use href="#i-activity"/></svg>
-          <div>
-            <h3>Flies and walks</h3>
-            <p>With drivers, model and controller in place, the same AI plans and carries out the mission on that vehicle.</p>
-          </div>
-          <ul class="specs">
-            <li>Planning, control and perception in one stack</li>
-            <li>Simulation before every field test</li>
-            <li>Remote takeover at any time</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PLATFORMS -->
-  <section id="platforms" class="white">
-    <div class="wrap">
-      <h2>One AI, three kinds of body</h2>
-      <p class="intro">The same model moves between vehicles because it learns each machine from the hardware up.</p>
       <div class="platforms">
         <div class="platform" data-img="images/drone.jpg">
           <img alt="Drones" hidden>
@@ -405,11 +313,132 @@
           </div>
         </div>
       </div>
+
+      <div class="feats">
+        <div class="feat">
+          <svg class="ic" aria-hidden="true"><use href="#i-brain"/></svg>
+          <div><h3>Plans the mission</h3><p>Takes a job in plain language and turns it into a flight or task plan for that vehicle.</p></div>
+        </div>
+        <div class="feat">
+          <svg class="ic" aria-hidden="true"><use href="#i-activity"/></svg>
+          <div><h3>Controls the body</h3><p>Runs the control loop on a model it learned from the real machine, not a generic one.</p></div>
+        </div>
+        <div class="feat">
+          <svg class="ic" aria-hidden="true"><use href="#i-cpu"/></svg>
+          <div><h3>Perceives the world</h3><p>Uses cameras, lidar and IMU together to see obstacles, targets and its own state.</p></div>
+        </div>
+        <div class="feat">
+          <svg class="ic" aria-hidden="true"><use href="#i-function"/></svg>
+          <div><h3>Learns from every run</h3><p>Every flight and every fault goes back into the model, so the next vehicle is faster to bring up.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. HARDWARE CONNECTION -->
+  <section id="hardware">
+    <div class="wrap">
+      <div class="offer"><span class="num">2</span><h2>Hardware connection</h2></div>
+      <p class="intro">The layer that makes our physical AI different, also available on its own for your robot and your AI stack. It connects to the boards, motors and sensors directly.</p>
+
+      <div class="hw-grid">
+        <div class="pitch">
+          <h3>Bring-up without the integration project</h3>
+          <p>Most robot AI sits on top of an integration layer that engineers write by hand for every new vehicle. <strong>Our AI is connected to the hardware itself.</strong> Give it a new motor controller, camera or IMU and it reads the datasheet, writes the driver, tests it on the bench, runs identification to learn how the machine moves, and finds faults in the raw signals.</p>
+          <p>Use it under our physical AI, or plug it under your own model, ROS 2 stack or flight controller.</p>
+        </div>
+        <div class="console" aria-label="Example log of the AI bringing up a new drone on its own">
+          <div class="console-top">
+            <span>New vehicle: quadrotor, unknown hardware</span>
+            <span class="live"><span class="dot"></span>AI online</span>
+          </div>
+          <div class="log" id="log" aria-live="off"></div>
+          <div class="stages" id="stages">
+            <div>Connect</div>
+            <div>Drivers</div>
+            <div>Identify</div>
+            <div>Fly</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diff">
+        <div class="diff-col">
+          <h3>The usual approach</h3>
+          <p class="sub">The AI only sees what the middle layer gives it.</p>
+          <div class="stack">
+            <div class="box ai"><svg class="ic" aria-hidden="true"><use href="#i-brain"/></svg>AI model</div>
+            <div class="arrow"></div>
+            <div class="box mid"><svg class="ic" aria-hidden="true"><use href="#i-tool"/></svg>Hand-written integration layer</div>
+            <div class="arrow"></div>
+            <div class="box hw"><svg class="ic" aria-hidden="true"><use href="#i-motor"/></svg>Motors, sensors, boards</div>
+          </div>
+          <ul>
+            <li>Engineers write drivers and interfaces for every new robot</li>
+            <li>Hardware problems are hidden from the AI</li>
+            <li>Moving to a new vehicle means starting the layer again</li>
+          </ul>
+        </div>
+        <div class="diff-col ours">
+          <h3>Our approach</h3>
+          <p class="sub">The AI is connected to the hardware and can build it.</p>
+          <div class="stack">
+            <div class="box ai"><svg class="ic" aria-hidden="true"><use href="#i-brain"/></svg>AI model</div>
+            <div class="arrow two"></div>
+            <div class="box hw"><svg class="ic" aria-hidden="true"><use href="#i-motor"/></svg>Motors, sensors, boards</div>
+          </div>
+          <ul>
+            <li>Writes and tests its own drivers for new parts</li>
+            <li>Runs system identification to learn how the machine moves</li>
+            <li>Finds and fixes hardware and software faults itself</li>
+            <li>Moves to a new vehicle without a new integration project</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="build">
+        <div class="build-row">
+          <svg class="ic ic-lg cap-ic" aria-hidden="true"><use href="#i-file-code"/></svg>
+          <div>
+            <h3>Builds the drivers</h3>
+            <p>Give it a new motor controller, camera or IMU and it writes the driver, tests it on the bench and keeps it.</p>
+          </div>
+          <ul class="specs">
+            <li>Reads datasheets and protocols</li>
+            <li>Writes, compiles and tests driver code</li>
+            <li>Works with common boards and buses</li>
+          </ul>
+        </div>
+        <div class="build-row">
+          <svg class="ic ic-lg cap-ic" aria-hidden="true"><use href="#i-function"/></svg>
+          <div>
+            <h3>Identifies the system</h3>
+            <p>It runs its own experiments to learn mass, inertia, motor response and delays, then builds a model it can control.</p>
+          </div>
+          <ul class="specs">
+            <li>Automatic test signals and data capture</li>
+            <li>Model fitting and validation</li>
+            <li>Controller tuning from the fitted model</li>
+          </ul>
+        </div>
+        <div class="build-row">
+          <svg class="ic ic-lg cap-ic hi" aria-hidden="true"><use href="#i-bug"/></svg>
+          <div>
+            <h3>Debugs itself</h3>
+            <p>When a sensor drifts, a motor stalls or a cable is wrong, the AI sees it in the raw data and works out the cause.</p>
+          </div>
+          <ul class="specs">
+            <li>Fault detection from raw signals</li>
+            <li>Root cause with a plain explanation</li>
+            <li>Safe fallback while it fixes the problem</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- PROCESS -->
-  <section id="process">
+  <section id="process" class="white">
     <div class="wrap">
       <h2>How a project runs</h2>
       <p class="intro">Bring your vehicle, or let us build one. The AI does the bring-up, and your team watches every step.</p>
@@ -435,7 +464,7 @@
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="white">
+  <section id="about">
     <div class="wrap">
     <div class="about-grid">
       <h2>Built by people who write the control code and the drivers themselves.</h2>
@@ -444,10 +473,6 @@
         <p>Our team comes from research in control systems, sensor fusion and machine learning for drones, spacecraft and underwater robots. We bring that work out of the lab and into real vehicles.</p>
         <p>AIXAutonomy LLC was founded in 2026 in Texas by Reza Pirayesh, PhD in mechanical engineering, whose earlier work includes control and sensor fusion for underwater robots at Texas A&amp;M and spacecraft formation control with NASA.</p>
       </div>
-    </div>
-    <div class="about-photo" data-img="images/lab.jpg">
-      <img alt="Our lab and test vehicles" hidden>
-      <div class="fallback">Lab photo goes here (images/lab.jpg)</div>
     </div>
     </div>
   </section>
@@ -458,12 +483,12 @@
       <div>
         <h2>Have a robot that needs a brain?</h2>
         <p>Tell us about the vehicle, the job and the timeline. We reply within two business days.</p>
-        <a class="mail" href="mailto:reza@aixautonomy.com?subject=Project%20inquiry">reza@aixautonomy.com</a>
+        <a class="mail" href="mailto:rpirayeshs@gmail.com?subject=Project%20inquiry">rpirayeshs@gmail.com</a>
       </div>
       <dl>
         <dt>Company</dt><dd>AIXAutonomy LLC</dd>
         <dt>Registered in</dt><dd>Texas, USA</dd>
-        <dt>Email</dt><dd><a href="mailto:reza@aixautonomy.com">reza@aixautonomy.com</a></dd>
+        <dt>Email</dt><dd><a href="mailto:rpirayeshs@gmail.com">rpirayeshs@gmail.com</a></dd>
       </dl>
     </div>
   </section>
@@ -472,7 +497,6 @@
 <footer>
   <div class="wrap">
     <span>&copy; <span id="yr">2026</span> AIXAutonomy LLC. A Texas limited liability company.</span>
-    <span>aixautonomy.com</span>
   </div>
 </footer>
 

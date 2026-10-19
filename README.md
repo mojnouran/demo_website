@@ -12,7 +12,7 @@ Find and replace in `index.html`:
 | Find | Replace with |
 |---|---|
 | `Texas, USA` | change if you list a different location |
-| `reza@aixautonomy.com` | change if the address changes |
+| `rpirayeshs@gmail.com` | change when the company email exists |
 
 ## Deploy on Vercel
 
