@@ -7,6 +7,7 @@
   QUICK EDITS
   Email: find and replace "rpirayeshs@gmail.com"
   Photos: see images/README.txt
+  Icons: Tabler Icons v3.49.0, MIT license, https://tabler.io/icons
 -->
 <title>AIXAutonomy | Physical AI for drones, aircraft, cars and humanoids</title>
 <meta name="description" content="AIXAutonomy builds physical AI for drones, aircraft, autonomous cars and humanoids, and the hardware connection layer that lets the AI write drivers, identify the machine and debug it.">
@@ -17,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,700;112,800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
 <style>
   :root{
     --sky:#E6EEF4;
@@ -26,18 +28,22 @@
     --line:#C3D0DC;
     --signal:#F5B700;
     --ok:#46D17E;
+    --warn:#FF8A80;
     --gcs:#0F1E33;
+    --gcs-deep:#0A1729;
     --gcs-line:#29405E;
     --head:"Archivo", system-ui, sans-serif;
     --body:"Source Sans 3", system-ui, sans-serif;
     --mono:"JetBrains Mono", ui-monospace, monospace;
     --max:1120px;
+    --ease:cubic-bezier(.2,.7,.2,1);
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--sky);color:var(--ink);font:400 1.0625rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
   img,svg{display:block;max-width:100%}
   a{color:inherit}
+  button{font-family:inherit}
   :focus-visible{outline:3px solid var(--signal);outline-offset:3px;border-radius:2px}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
   h1,h2,h3{font-family:var(--head);font-stretch:112%;line-height:1.08;margin:0}
@@ -45,131 +51,197 @@
   h2{font-weight:800;font-size:clamp(1.8rem,3.4vw,2.5rem);letter-spacing:-.015em}
   h3{font-weight:700;font-size:1.25rem}
   p{margin:0}
+  section{padding:96px 0;scroll-margin-top:72px}
+  .white{background:var(--white)}
+  .intro{max-width:48ch;margin-top:16px;color:var(--slate);font-size:1.15rem}
 
-  /* header */
-  header{position:sticky;top:0;z-index:10;background:rgba(230,238,244,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  /* progress bar + header */
+  .progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:30;pointer-events:none}
+  .progress i{display:block;height:100%;background:var(--signal);transform:scaleX(0);transform-origin:0 50%}
+  header{position:sticky;top:0;z-index:10;background:rgba(230,238,244,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:box-shadow .35s}
+  header.scrolled{box-shadow:0 12px 30px -20px rgba(15,30,51,.45)}
   .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 1.15rem var(--head);font-stretch:112%}
+  .brand svg{transition:transform .5s var(--ease)}
+  .brand:hover svg{transform:rotate(90deg)}
   nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
-  nav a{text-decoration:none;color:var(--slate);font-weight:600}
-  nav a:hover{color:var(--ink)}
-  .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:6px;padding:8px 12px;font:600 1rem var(--body);color:var(--ink)}
+  nav a{text-decoration:none;color:var(--slate);font-weight:600;position:relative;padding:4px 0;transition:color .2s}
+  nav a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--signal);transform:scaleX(0);transform-origin:0 50%;transition:transform .3s var(--ease)}
+  nav a:hover,nav a.active{color:var(--ink)}
+  nav a:hover::after,nav a.active::after{transform:scaleX(1)}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:6px;padding:8px 12px;font:600 1rem var(--body);color:var(--ink);cursor:pointer}
 
   /* buttons */
-  .btn{display:inline-block;text-decoration:none;font-weight:600;padding:13px 22px;border-radius:6px;border:2px solid var(--ink)}
-  .btn-main{background:var(--signal);border-color:var(--signal);color:var(--ink)}
-  .btn-main:hover{background:#E0A600;border-color:#E0A600}
+  .btn{display:inline-block;text-decoration:none;font-weight:600;padding:13px 22px;border-radius:6px;border:2px solid var(--ink);transition:transform .25s var(--ease),background .2s,color .2s,box-shadow .25s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-main{background:var(--signal);border-color:var(--signal);color:var(--ink);box-shadow:0 8px 20px -12px rgba(245,183,0,.9)}
+  .btn-main:hover{background:#E0A600;border-color:#E0A600;box-shadow:0 14px 26px -12px rgba(245,183,0,.9)}
   .btn-line:hover{background:var(--ink);color:var(--white)}
 
   /* hero */
-  .hero{padding:72px 0 88px}
+  .hero{padding:72px 0 88px;overflow:hidden;position:relative}
+  .hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(19,35,58,.09) 1px,transparent 1.2px);background-size:22px 22px;-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent);mask-image:linear-gradient(to bottom,#000 30%,transparent);pointer-events:none}
+  .hero .wrap{position:relative}
   .hero-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
   .hero p.lead{margin-top:22px;font-size:1.2rem;color:var(--slate);max-width:36ch}
   .hero .actions{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+  .js .hero h1{opacity:0}
+  .js .hero h1.ready{opacity:1}
+  .hero h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
+  .hero h1 .w>span{display:inline-block;will-change:transform}
+  .js .hero h1 .w>span{transform:translateY(110%)}
+  .js.loaded .hero h1 .w>span{transform:none;transition:transform .9s var(--ease);transition-delay:calc(var(--i)*55ms)}
+  .js .hero .lead,.js .hero .actions{opacity:0;transform:translateY(14px)}
+  .js.loaded .hero .lead{opacity:1;transform:none;transition:opacity .7s ease .5s,transform .7s var(--ease) .5s}
+  .js.loaded .hero .actions{opacity:1;transform:none;transition:opacity .7s ease .65s,transform .7s var(--ease) .65s}
+  .js .twin{opacity:0;transform:translateY(24px)}
+  .js.loaded .twin{opacity:1;transform:none;transition:opacity .9s ease .35s,transform .9s var(--ease) .35s}
+
+  /* dark panels (twin + console) */
+  .twin,.console{background:var(--gcs);border-radius:14px;padding:14px;box-shadow:0 30px 60px -30px rgba(15,30,51,.55)}
+  .panel-top{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#9FB3CB;font:600 .85rem var(--body);padding:2px 6px 12px}
+  .panel-top .live{display:flex;align-items:center;gap:7px;white-space:nowrap}
+  .panel-top .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(70,209,126,.55)}70%{box-shadow:0 0 0 8px rgba(70,209,126,0)}100%{box-shadow:0 0 0 0 rgba(70,209,126,0)}}
+  .twin-stage{position:relative;border-radius:8px;overflow:hidden;background:var(--gcs-deep);aspect-ratio:16/11;cursor:crosshair;touch-action:pan-y}
+  .twin-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .twin-hint{position:absolute;right:10px;bottom:10px;font:600 .72rem var(--body);color:#8297B0;background:rgba(10,23,41,.75);padding:4px 8px;border-radius:4px;pointer-events:none;transition:opacity .5s}
+  .twin-stage.touched .twin-hint{opacity:0}
+  @media (hover:none){.twin-hint{display:none}}
+  .readouts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:12px;background:var(--gcs-line);border-radius:8px;overflow:hidden}
+  .readouts div{background:var(--gcs);padding:10px 12px}
+  .readouts span{display:block;color:#8297B0;font-size:.8rem}
+  .readouts strong{display:block;color:#EAF1F8;font:700 1.1rem var(--head);font-stretch:100%;font-variant-numeric:tabular-nums}
 
   /* console */
-  .console{background:var(--gcs);border-radius:14px;padding:14px;box-shadow:0 30px 60px -30px rgba(15,30,51,.55)}
-  .console-top{display:flex;justify-content:space-between;color:#9FB3CB;font:600 .85rem var(--body);padding:2px 6px 12px}
-  .console-top .live{display:flex;align-items:center;gap:7px}
-  .console-top .dot{width:8px;height:8px;border-radius:50%;background:var(--ok)}
-  .log{background:#0A1729;border-radius:8px;padding:16px 18px;height:300px;overflow:hidden;font:400 .86rem/1.7 var(--mono);color:#C9D6E4}
-  .log div{opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s;white-space:pre-wrap}
-  .log div.show{opacity:1;transform:none}
+  .log{background:var(--gcs-deep);border-radius:8px;padding:16px 18px;height:300px;overflow:hidden;font:400 .86rem/1.7 var(--mono);color:#C9D6E4}
+  .log .ln{white-space:pre-wrap;word-break:break-word}
   .log .k{color:#8FA3BA}
   .log .y{color:var(--signal)}
   .log .g{color:var(--ok)}
-  .log .r{color:#FF8A80}
+  .log .r{color:var(--warn)}
+  .log .cur{display:inline-block;width:7px;height:.95em;background:var(--signal);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .replay{background:none;border:1px solid var(--gcs-line);color:#9FB3CB;border-radius:5px;padding:3px 9px;font:600 .75rem var(--body);cursor:pointer;transition:color .2s,border-color .2s}
+  .replay:hover{color:#EAF1F8;border-color:#9FB3CB}
   .stages{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:12px;background:var(--gcs-line);border-radius:8px;overflow:hidden}
-  .stages div{background:var(--gcs);padding:10px 12px;color:#8297B0;font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:8px}
-  .stages div::before{content:"";width:8px;height:8px;border-radius:50%;background:#3E5C82;flex:none}
-  .stages div.active{color:#EAF1F8}
-  .stages div.active::before{background:var(--signal)}
-  .stages div.done::before{background:var(--ok)}
+  .stages button{appearance:none;border:0;background:var(--gcs);padding:10px 12px;color:#8297B0;font:600 .85rem var(--body);display:flex;align-items:center;gap:8px;cursor:pointer;text-align:left;transition:color .2s,background .2s}
+  .stages button::before{content:"";width:8px;height:8px;border-radius:50%;background:#3E5C82;flex:none;transition:background .3s}
+  .stages button:hover{color:#EAF1F8;background:#15284A}
+  .stages button.active{color:#EAF1F8}
+  .stages button.active::before{background:var(--signal);box-shadow:0 0 8px rgba(245,183,0,.8)}
+  .stages button.done::before{background:var(--ok)}
 
-  /* icons (stroke style, inherit color) */
-  .ic{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .ic-lg{stroke-width:1.5}
-  .cap-ic{width:88px;height:88px;color:var(--ink);padding:16px;background:var(--white);border:1.5px solid var(--line);border-radius:12px}
-  .cap-ic.hi{color:var(--signal);background:var(--ink);border-color:var(--ink)}
-  .box .ic{width:22px;height:22px;vertical-align:-5px;margin-right:8px}
-  /* hero photo panel */
-  .hero-photo{position:relative;border-radius:14px;overflow:hidden;background:var(--gcs);aspect-ratio:4/3;box-shadow:0 30px 60px -30px rgba(15,30,51,.55)}
-  .hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .hero-photo .fallback{position:absolute;inset:0;display:grid;place-items:center;color:var(--signal)}
-  .hero-photo .fallback svg{width:120px;height:120px}
-  .hero-photo.has-img .fallback{display:none}
-  .hero-photo .tag{position:absolute;left:16px;bottom:16px;background:rgba(10,23,41,.85);color:#EAF1F8;padding:8px 12px;border-radius:6px;font:600 .85rem var(--body)}
+  /* reveal on scroll */
+  .js .rv{opacity:0;transform:translateY(18px)}
+  .js .rv.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s var(--ease);transition-delay:var(--d,0ms)}
+
   /* offering header */
   .offer{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
   .offer .num{font:800 .95rem var(--head);color:var(--white);background:var(--ink);padding:4px 10px;border-radius:6px}
   .white .offer .num{background:var(--signal);color:var(--ink)}
-  /* two-column feature list */
+
+  /* platform cards */
+  .platforms{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .platform{position:relative;border-radius:14px;overflow:hidden;background:var(--gcs);aspect-ratio:3/4;color:var(--white);transform-style:preserve-3d;will-change:transform;box-shadow:0 20px 40px -30px rgba(15,30,51,.5);transition:box-shadow .5s}
+  .platform:hover{box-shadow:0 30px 50px -28px rgba(15,30,51,.6)}
+  .platform img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+  .platform:hover img{transform:scale(1.07)}
+  .platform .fallback{position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-start;padding-top:22%;color:var(--signal)}
+  .platform .fallback svg{width:96px;height:96px}
+  .platform.has-img .fallback{display:none}
+  .platform .cap{position:absolute;left:0;right:0;bottom:0;padding:120px 20px 20px;background:linear-gradient(to top,rgba(10,23,41,.95) 0%,rgba(10,23,41,.6) 55%,transparent 100%);transform:translateY(8px);transition:transform .5s var(--ease)}
+  .platform:hover .cap{transform:none}
+  .platform .cap h3{color:var(--white)}
+  .platform .cap p{color:#C9D6E4;margin-top:6px}
+
+  /* feature list */
   .feats{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}
   .feat{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start}
-  .feat svg{width:52px;height:52px;padding:12px;color:var(--ink);background:var(--white);border:1.5px solid var(--line);border-radius:10px}
+  .feat svg{width:52px;height:52px;padding:12px;color:var(--ink);background:var(--white);border:1.5px solid var(--line);border-radius:10px;transition:background .3s,color .3s,border-color .3s,transform .4s var(--ease)}
+  .feat:hover svg{background:var(--ink);color:var(--signal);border-color:var(--ink);transform:translateY(-2px)}
   .feat p{color:var(--slate);margin-top:4px}
-  /* hardware section band */
+
+  /* hardware section */
   .hw-grid{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
   .hw-grid .pitch p{color:var(--slate);margin-top:14px}
   .hw-grid .pitch p strong{color:var(--ink)}
   .hw-grid .log{font-size:.78rem;height:330px}
-  /* sections */
-  section{padding:96px 0}
-  .white{background:var(--white)}
-  .intro{max-width:48ch;margin-top:16px;color:var(--slate);font-size:1.15rem}
 
   /* difference diagram */
   .diff{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
-  .diff-col{border:1.5px solid var(--line);border-radius:12px;padding:28px}
+  .diff-col{border:1.5px solid var(--line);border-radius:12px;padding:28px;background:rgba(255,255,255,.5)}
   .diff-col.ours{border:2.5px solid var(--ink);background:var(--white)}
   .diff-col h3{margin-bottom:6px}
   .diff-col p.sub{color:var(--slate);margin-bottom:24px}
-  .stack{display:flex;flex-direction:column;align-items:center;gap:0}
-  .box{width:100%;max-width:300px;text-align:center;padding:14px 16px;border-radius:8px;font-weight:600;border:1.5px solid var(--ink)}
+  .stack{display:flex;flex-direction:column;align-items:center}
+  .box{width:100%;max-width:300px;text-align:center;padding:14px 16px;border-radius:8px;font-weight:600;border:1.5px solid var(--ink);transition:box-shadow .3s,background .3s}
   .box.ai{background:var(--ink);color:var(--white)}
   .box.mid{background:var(--sky);border-style:dashed;color:var(--slate)}
   .box.hw{background:var(--signal)}
-  .arrow{height:26px;width:2px;background:var(--ink);position:relative}
+  .box .ic{width:22px;height:22px;vertical-align:-5px;margin-right:8px}
+  .arrow{height:34px;width:2px;background:var(--ink);position:relative}
   .arrow::after{content:"";position:absolute;bottom:-1px;left:-5px;border:6px solid transparent;border-top:8px solid var(--ink);border-bottom:0}
   .arrow.two::before{content:"";position:absolute;top:-1px;left:-5px;border:6px solid transparent;border-bottom:8px solid var(--ink);border-top:0}
+  .arrow .pk{position:absolute;left:-3px;top:-8px;width:8px;height:8px;border-radius:50%;background:var(--signal);box-shadow:0 0 8px rgba(245,183,0,.8);opacity:0}
   .diff-col ul{margin:24px 0 0;padding-left:18px;color:var(--slate)}
   .diff-col li{margin:6px 0}
   .diff-col.ours ul{color:var(--ink)}
+  /* usual: AI -> layer -> hardware, 3.6 s cycle */
+  .diff.play .usual .a1 .pk{animation:flowA 3.6s linear infinite}
+  .diff.play .usual .a2 .pk{animation:flowB 3.6s linear infinite}
+  .diff.play .usual .box.mid{animation:flashMid 3.6s linear infinite}
+  .diff.play .usual .box.hw{animation:flashHw 3.6s linear infinite}
+  @keyframes flowA{0%{top:-8px;opacity:0}3%{opacity:1}26%{top:100%;opacity:1}28%{opacity:0}100%{top:100%;opacity:0}}
+  @keyframes flashMid{0%,27%{background:var(--sky)}31%{background:#FFF1BF}48%{background:var(--sky)}100%{background:var(--sky)}}
+  @keyframes flowB{0%,46%{top:-8px;opacity:0}49%{opacity:1}72%{top:100%;opacity:1}74%{opacity:0}100%{top:100%;opacity:0}}
+  @keyframes flashHw{0%,73%{box-shadow:0 0 0 0 rgba(245,183,0,0)}77%{box-shadow:0 0 0 6px rgba(245,183,0,.35)}92%,100%{box-shadow:0 0 0 0 rgba(245,183,0,0)}}
+  /* ours: AI <-> hardware, 1.8 s cycle */
+  .diff.play .ours .pk.down{animation:flowDown 1.8s linear infinite}
+  .diff.play .ours .pk.up{animation:flowUp 1.8s linear infinite}
+  .diff.play .ours .box.hw{animation:flashHw2 1.8s linear infinite}
+  @keyframes flowDown{0%{top:-8px;opacity:0}5%{opacity:1}44%{top:100%;opacity:1}47%{opacity:0}100%{top:100%;opacity:0}}
+  @keyframes flowUp{0%,50%{top:100%;opacity:0}55%{opacity:1}94%{top:-8px;opacity:1}97%{opacity:0}100%{top:-8px;opacity:0}}
+  @keyframes flashHw2{0%,45%{box-shadow:0 0 0 0 rgba(245,183,0,0)}50%{box-shadow:0 0 0 6px rgba(245,183,0,.35)}70%,100%{box-shadow:0 0 0 0 rgba(245,183,0,0)}}
 
-  /* capabilities rows */
+  /* capability rows with mini visuals */
   .build{margin-top:48px;border-top:2px solid var(--ink)}
   .build-row{display:grid;grid-template-columns:220px 1fr 1fr;gap:32px;padding:32px 0;border-bottom:1px solid var(--line)}
-  .build-row .cap-ic{margin-top:2px}
   .build-row p{color:var(--slate);margin-top:8px}
   .specs{list-style:none;margin:0;padding:0;font-size:.98rem}
   .specs li{padding:4px 0;border-bottom:1px dashed var(--line)}
   .specs li:last-child{border-bottom:0}
-
-  /* platforms */
-  .platforms{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
-  .platforms{gap:20px}
-  .platform{position:relative;border-radius:14px;overflow:hidden;background:var(--gcs);aspect-ratio:3/4;color:var(--white)}
-  .platform img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .platform .fallback{position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-start;padding-top:22%;color:var(--signal)}
-  .platform .fallback svg{width:96px;height:96px}
-  .platform.has-img .fallback{display:none}
-  .platform .cap{position:absolute;left:0;right:0;bottom:0;padding:120px 20px 20px;background:linear-gradient(to top,rgba(10,23,41,.95) 0%,rgba(10,23,41,.6) 55%,transparent 100%)}
-  .platform .cap h3{color:var(--white)}
-  .platform .cap p{color:#C9D6E4;margin-top:6px}
-  .photo-note{margin-top:20px;color:var(--slate);font-size:.95rem}
-  /* about photo */
-  .about-photo{margin-top:56px;border-radius:14px;overflow:hidden;background:var(--gcs);aspect-ratio:21/9;position:relative}
-  .about-photo img{width:100%;height:100%;object-fit:cover;display:block}
-  .about-photo .fallback{position:absolute;inset:0;display:grid;place-items:center;color:#8FA3BA;font-weight:600}
-  .about-photo.has-img .fallback{display:none}
-  .platform p{color:var(--slate);margin-top:8px}
+  .mini{width:220px;height:132px;border-radius:10px;background:var(--gcs);overflow:hidden;position:relative;color:#C9D6E4;box-shadow:0 16px 30px -22px rgba(15,30,51,.6)}
+  .mini svg{position:absolute;inset:0;width:100%;height:100%}
+  .m-code{font:500 .72rem/1.6 var(--mono);padding:12px 14px}
+  .m-code div{white-space:pre;overflow:hidden;width:0}
+  .m-code .ok{color:var(--ok)}.m-code .k{color:#8FA3BA}.m-code .y{color:var(--signal)}
+  .play .m-code div{animation:typeIn .45s steps(22) forwards}
+  @keyframes typeIn{to{width:100%}}
+  .mini .draw{stroke-dasharray:1;stroke-dashoffset:1}
+  .play .draw{animation:draw 1.3s var(--ease) forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .mini .fade{opacity:0}
+  .play .fade{animation:fadeIn .5s ease forwards}
+  @keyframes fadeIn{to{opacity:1}}
+  .mini .ring{opacity:0;transform-origin:center;transform-box:fill-box}
+  .play .ring{animation:ring 1.3s ease-out forwards}
+  @keyframes ring{0%{opacity:0;transform:scale(.3)}25%{opacity:1}100%{opacity:0;transform:scale(2.4)}}
+  .mini text{font-family:var(--body);font-weight:600;font-size:10px}
 
   /* process */
-  .steps{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);counter-reset:step;position:relative}
+  .steps{margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);counter-reset:step;position:relative}
+  .steps::before,.steps::after{content:"";position:absolute;top:21px;left:22px;width:75%;height:2px;background:var(--line)}
+  .steps::after{background:var(--ink);transform:scaleX(0);transform-origin:0 50%;transition:transform 1.6s var(--ease) .2s}
+  .steps.play::after{transform:scaleX(1)}
   .step{padding:0 24px 0 0;position:relative}
-  .step::before{counter-increment:step;content:counter(step);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--white);font:800 1.1rem var(--head);margin-bottom:20px;position:relative;z-index:1}
-  .step::after{content:"";position:absolute;top:22px;left:44px;right:0;height:2px;background:var(--line)}
-  .step:last-child::after{display:none}
+  .step::before{counter-increment:step;content:counter(step);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--white);color:var(--ink);border:2px solid var(--line);font:800 1.1rem var(--head);margin-bottom:20px;position:relative;z-index:1;transition:background .4s,color .4s,border-color .4s,transform .4s var(--ease)}
+  .steps.play .step::before{background:var(--ink);color:var(--white);border-color:var(--ink)}
+  .steps.play .step:nth-child(1)::before{transition-delay:.15s}
+  .steps.play .step:nth-child(2)::before{transition-delay:.6s}
+  .steps.play .step:nth-child(3)::before{transition-delay:1.05s}
+  .steps.play .step:nth-child(4)::before{transition-delay:1.5s}
+  .step:hover::before{transform:scale(1.08)}
   .step h3{margin-bottom:8px}
   .step p{color:var(--slate)}
 
@@ -177,13 +249,22 @@
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
   .about-grid p + p{margin-top:16px}
   .about-grid .col p{color:var(--slate)}
+  .about-photo{margin-top:56px;border-radius:14px;overflow:hidden;background:var(--gcs);aspect-ratio:21/9;position:relative}
+  .about-photo img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.15);will-change:transform}
+  .about-photo .fallback{position:absolute;inset:0;display:grid;place-items:center;color:#8FA3BA;font-weight:600}
+  .about-photo.has-img .fallback{display:none}
+  .about-photo .tag{position:absolute;left:16px;bottom:16px;background:rgba(10,23,41,.85);color:#EAF1F8;padding:8px 12px;border-radius:6px;font:600 .85rem var(--body)}
 
   /* contact */
   .contact{background:var(--ink);color:var(--white)}
   .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:end}
   .contact p{color:#B8C6D6;margin-top:16px;max-width:42ch}
-  .mail{display:inline-block;margin-top:28px;font:700 clamp(1.3rem,3vw,2rem) var(--head);font-stretch:100%;color:var(--signal);text-decoration:none;border-bottom:2px solid var(--signal);word-break:break-all}
+  .mail-row{margin-top:28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .mail{font:700 clamp(1.3rem,3vw,2rem) var(--head);font-stretch:100%;color:var(--signal);text-decoration:none;border-bottom:2px solid var(--signal);word-break:break-all;transition:color .2s,border-color .2s}
   .mail:hover{color:var(--white);border-color:var(--white)}
+  .copy{background:none;border:1.5px solid rgba(255,255,255,.35);color:#EAF1F8;border-radius:6px;padding:7px 12px;font:600 .85rem var(--body);cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+  .copy:hover{border-color:var(--signal)}
+  .copy.done{background:var(--ok);border-color:var(--ok);color:var(--ink)}
   .contact dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 24px}
   .contact dt{color:#8FA3BA}
   .contact dd{margin:0}
@@ -191,33 +272,56 @@
   footer{background:var(--ink);color:#8FA3BA;border-top:1px solid #263A55;padding:28px 0;font-size:.95rem}
   footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
+  /* icons */
+  .ic{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .ic-lg{stroke-width:1.5}
+
   /* responsive */
   @media (max-width:900px){
     .hero-grid,.about-grid,.contact-grid,.diff,.hw-grid,.feats{grid-template-columns:1fr;gap:40px}
     .feats{gap:24px}
     .build-row{grid-template-columns:1fr;gap:16px}
-    .platforms{grid-template-columns:1fr 1fr;gap:20px}
+    .platforms{grid-template-columns:1fr 1fr}
     .steps{grid-template-columns:1fr 1fr;gap:40px 0}
-    .step::after{display:none}
+    .steps::before,.steps::after{display:none}
+    .steps.play .step::before{transition-delay:0s}
   }
   @media (max-width:640px){
     .menu-btn{display:block}
-    nav ul{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--sky);border-bottom:1px solid var(--line);padding:8px 24px}
-    nav ul.open{display:flex}
+    nav ul{position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--sky);border-bottom:1px solid var(--line);padding:8px 24px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s,transform .25s var(--ease),visibility 0s .25s}
+    nav ul.open{opacity:1;visibility:visible;transform:none;transition:opacity .25s,transform .25s var(--ease)}
     nav li a{display:block;padding:12px 0}
+    nav a::after{display:none}
     .wrap{padding:0 16px}
     section{padding:72px 0}
     .hero{padding:48px 0 64px}
     .steps{grid-template-columns:1fr}
     .platforms{grid-template-columns:1fr}
     .platform{aspect-ratio:3/2}
-    .stages{grid-template-columns:repeat(2,1fr)}
-    .log{font-size:.78rem;height:280px}
+    .readouts,.stages{grid-template-columns:repeat(2,1fr)}
+    .log,.hw-grid .log{font-size:.76rem;height:280px}
   }
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.log div{transition:none}}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important;transition-delay:0s!important}
+    .js .rv,.js .hero .lead,.js .hero .actions,.js .twin{opacity:1;transform:none}
+    .js .hero h1 .w>span{transform:none}
+    .js .hero h1{opacity:1}
+    .m-code div{width:100%}
+    .mini .draw{stroke-dashoffset:0}
+    .mini .fade{opacity:1}
+    .mini .ring{display:none}
+    .arrow .pk{display:none}
+    .steps::after{transform:scaleX(1)}
+    .step::before{background:var(--ink);color:var(--white);border-color:var(--ink)}
+    .about-photo img{transform:none}
+    .twin-hint{display:none}
+  }
 </style>
 </head>
 <body>
+
+<div class="progress" aria-hidden="true"><i></i></div>
 
 <header>
   <div class="wrap bar">
@@ -238,7 +342,6 @@
   </div>
 </header>
 
-<!-- Icons: Tabler Icons v3.49.0, MIT license, https://tabler.io/icons -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="mark" viewBox="0 0 32 32">
     <rect width="32" height="32" rx="7" fill="#13233A"/>
@@ -250,21 +353,19 @@
   </symbol>
   <symbol id="i-drone" viewBox="0 0 24 24"><path d="M10 10h4v4h-4l0 -4"/><path d="M10 10l-3.5 -3.5"/><path d="M9.96 6a3.5 3.5 0 1 0 -3.96 3.96"/><path d="M14 10l3.5 -3.5"/><path d="M18 9.96a3.5 3.5 0 1 0 -3.96 -3.96"/><path d="M14 14l3.5 3.5"/><path d="M14.04 18a3.5 3.5 0 1 0 3.96 -3.96"/><path d="M10 14l-3.5 3.5"/><path d="M6 14.04a3.5 3.5 0 1 0 3.96 3.96"/></symbol>
   <symbol id="i-plane" viewBox="0 0 24 24"><path d="M14.5 6.5l3 -2.9a2.05 2.05 0 0 1 2.9 2.9l-2.9 3l2.5 7.5l-2.5 2.55l-3.5 -6.55l-3 3v3l-2 2l-1.5 -4.5l-4.5 -1.5l2 -2h3l3 -3l-6.5 -3.5l2.5 -2.5l7.5 2.5"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"/></symbol>
   <symbol id="i-robot" viewBox="0 0 24 24"><path d="M6 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -4"/><path d="M12 2v2"/><path d="M9 12v9"/><path d="M15 12v9"/><path d="M5 16l4 -2"/><path d="M15 14l4 2"/><path d="M9 18h6"/><path d="M10 8v.01"/><path d="M14 8v.01"/></symbol>
-  <symbol id="i-file-code" viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/><path d="M10 13l-1 2l1 2"/><path d="M14 13l1 2l-1 2"/></symbol>
   <symbol id="i-function" viewBox="0 0 24 24"><path d="M3 19a2 2 0 0 0 2 2c2 0 2 -4 3 -9s1 -9 3 -9a2 2 0 0 1 2 2"/><path d="M5 12h6"/><path d="M15 12l6 6"/><path d="M15 18l6 -6"/></symbol>
-  <symbol id="i-bug" viewBox="0 0 24 24"><path d="M9 9v-1a3 3 0 0 1 6 0v1"/><path d="M8 9h8a6 6 0 0 1 1 3v3a5 5 0 0 1 -10 0v-3a6 6 0 0 1 1 -3"/><path d="M3 13l4 0"/><path d="M17 13l4 0"/><path d="M12 20l0 -6"/><path d="M4 19l3.35 -2"/><path d="M20 19l-3.35 -2"/><path d="M4 7l3.75 2.4"/><path d="M20 7l-3.75 2.4"/></symbol>
   <symbol id="i-activity" viewBox="0 0 24 24"><path d="M3 12h4l3 8l4 -16l3 8h4"/></symbol>
   <symbol id="i-cpu" viewBox="0 0 24 24"><path d="M5 6a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -12"/><path d="M9 9h6v6h-6l0 -6"/><path d="M3 10h2"/><path d="M3 14h2"/><path d="M10 3v2"/><path d="M14 3v2"/><path d="M21 10h-2"/><path d="M21 14h-2"/><path d="M14 21v-2"/><path d="M10 21v-2"/></symbol>
   <symbol id="i-brain" viewBox="0 0 24 24"><path d="M15.5 13a3.5 3.5 0 0 0 -3.5 3.5v1a3.5 3.5 0 0 0 7 0v-1.8"/><path d="M8.5 13a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1 -7 0v-1.8"/><path d="M17.5 16a3.5 3.5 0 0 0 0 -7h-.5"/><path d="M19 9.3v-2.8a3.5 3.5 0 0 0 -7 0"/><path d="M6.5 16a3.5 3.5 0 0 1 0 -7h.5"/><path d="M5 9.3v-2.8a3.5 3.5 0 0 1 7 0v10"/></symbol>
   <symbol id="i-motor" viewBox="0 0 24 24"><path d="M5 12a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M5 12h-3"/><path d="M19 12h3"/><path d="M10 14v-4l2 2l2 -2v4"/></symbol>
-  <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"/></symbol>
   <symbol id="i-tool" viewBox="0 0 24 24"><path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5"/></symbol>
 </svg>
 
 <main id="top">
 
-  <!-- HERO: Physical AI -->
+  <!-- HERO -->
   <div class="hero">
     <div class="wrap hero-grid">
       <div>
@@ -275,10 +376,22 @@
           <a class="btn btn-line" href="#hardware">Hardware connection</a>
         </div>
       </div>
-      <div class="hero-photo" data-img="images/lab.jpg">
-        <img alt="A quadrotor drone in flight" hidden>
-        <div class="fallback"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-drone"/></svg></div>
-        <span class="tag">Flight test</span>
+
+      <div class="twin" aria-label="Interactive digital twin of a quadrotor. Move the pointer over it to tilt the drone.">
+        <div class="panel-top">
+          <span>Digital twin of a quadrotor</span>
+          <span class="live"><span class="dot"></span>Live demo</span>
+        </div>
+        <div class="twin-stage" id="twin-stage">
+          <canvas id="twin" aria-hidden="true"></canvas>
+          <span class="twin-hint">Move your mouse to tilt</span>
+        </div>
+        <div class="readouts" aria-live="off">
+          <div><span>Roll</span><strong id="t-roll">0.0°</strong></div>
+          <div><span>Pitch</span><strong id="t-pitch">0.0°</strong></div>
+          <div><span>Rotor speed</span><strong id="t-rpm">5400 rpm</strong></div>
+          <div><span>Scan points</span><strong id="t-pts">0</strong></div>
+        </div>
       </div>
     </div>
   </div>
@@ -286,11 +399,11 @@
   <!-- 1. PHYSICAL AI -->
   <section id="physical-ai" class="white">
     <div class="wrap">
-      <div class="offer"><span class="num">1</span><h2>Physical AI</h2></div>
-      <p class="intro">A general AI brain for physical robots. The same model moves between vehicles because it learns each machine from the hardware up.</p>
+      <div class="offer rv"><span class="num">1</span><h2>Physical AI</h2></div>
+      <p class="intro rv">A general AI brain for physical robots. The same model moves between vehicles because it learns each machine from the hardware up.</p>
 
-      <div class="platforms">
-        <div class="platform" data-img="images/drone.jpg">
+      <div class="platforms stagger">
+        <div class="platform rv" data-img="images/drone.jpg">
           <img alt="Drones" hidden>
           <div class="fallback"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-drone"/></svg></div>
           <div class="cap">
@@ -298,7 +411,7 @@
             <p>Multirotors for inspection, mapping and research, from small indoor platforms to heavy lift.</p>
           </div>
         </div>
-        <div class="platform" data-img="images/aircraft.jpg">
+        <div class="platform rv" data-img="images/aircraft.jpg">
           <img alt="Aircraft" hidden>
           <div class="fallback"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-plane"/></svg></div>
           <div class="cap">
@@ -306,7 +419,7 @@
             <p>Fixed wing and eVTOL vehicles, where identification and fault handling matter most.</p>
           </div>
         </div>
-        <div class="platform" data-img="images/car.jpg">
+        <div class="platform rv" data-img="images/car.jpg">
           <img alt="Autonomous cars" hidden>
           <div class="fallback"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-car"/></svg></div>
           <div class="cap">
@@ -314,7 +427,7 @@
             <p>Road and off-road vehicles, from campus shuttles to research platforms.</p>
           </div>
         </div>
-        <div class="platform" data-img="images/humanoid.jpg">
+        <div class="platform rv" data-img="images/humanoid.jpg">
           <img alt="Humanoids" hidden>
           <div class="fallback"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-robot"/></svg></div>
           <div class="cap">
@@ -324,20 +437,20 @@
         </div>
       </div>
 
-      <div class="feats">
-        <div class="feat">
+      <div class="feats stagger">
+        <div class="feat rv">
           <svg class="ic" aria-hidden="true"><use href="#i-brain"/></svg>
           <div><h3>Plans the mission</h3><p>Takes a job in plain language and turns it into a flight or task plan for that vehicle.</p></div>
         </div>
-        <div class="feat">
+        <div class="feat rv">
           <svg class="ic" aria-hidden="true"><use href="#i-activity"/></svg>
           <div><h3>Controls the body</h3><p>Runs the control loop on a model it learned from the real machine, not a generic one.</p></div>
         </div>
-        <div class="feat">
+        <div class="feat rv">
           <svg class="ic" aria-hidden="true"><use href="#i-cpu"/></svg>
           <div><h3>Perceives the world</h3><p>Uses cameras, lidar and IMU together to see obstacles, targets and its own state.</p></div>
         </div>
-        <div class="feat">
+        <div class="feat rv">
           <svg class="ic" aria-hidden="true"><use href="#i-function"/></svg>
           <div><h3>Learns from every run</h3><p>Every flight and every fault goes back into the model, so the next vehicle is faster to bring up.</p></div>
         </div>
@@ -348,39 +461,39 @@
   <!-- 2. HARDWARE CONNECTION -->
   <section id="hardware">
     <div class="wrap">
-      <div class="offer"><span class="num">2</span><h2>Hardware connection</h2></div>
-      <p class="intro">The layer that makes our physical AI different, also available on its own for your robot and your AI stack. It connects to the boards, motors and sensors directly.</p>
+      <div class="offer rv"><span class="num">2</span><h2>Hardware connection</h2></div>
+      <p class="intro rv">The layer that makes our physical AI different, also available on its own for your robot and your AI stack. It connects to the boards, motors and sensors directly.</p>
 
       <div class="hw-grid">
-        <div class="pitch">
+        <div class="pitch rv">
           <h3>Bring-up without the integration project</h3>
           <p>Most robot AI sits on top of an integration layer that engineers write by hand for every new vehicle. <strong>Our AI is connected to the hardware itself.</strong> Give it a new motor controller, camera or IMU and it reads the datasheet, writes the driver, tests it on the bench, runs identification to learn how the machine moves, and finds faults in the raw signals.</p>
           <p>Use it under our physical AI, or plug it under your own model, ROS 2 stack or flight controller.</p>
         </div>
-        <div class="console" aria-label="Example log of the AI bringing up a new drone on its own">
-          <div class="console-top">
+        <div class="console rv" id="console" aria-label="Example log of the AI bringing up a new drone on its own">
+          <div class="panel-top">
             <span>New vehicle: quadrotor, unknown hardware</span>
-            <span class="live"><span class="dot"></span>AI online</span>
+            <button class="replay" type="button" id="replay">Replay</button>
           </div>
           <div class="log" id="log" aria-live="off"></div>
-          <div class="stages" id="stages">
-            <div>Connect</div>
-            <div>Drivers</div>
-            <div>Identify</div>
-            <div>Fly</div>
+          <div class="stages" id="stages" role="group" aria-label="Bring-up stages, click to jump">
+            <button type="button" data-stage="0">Connect</button>
+            <button type="button" data-stage="1">Drivers</button>
+            <button type="button" data-stage="2">Identify</button>
+            <button type="button" data-stage="3">Fly</button>
           </div>
         </div>
       </div>
 
-      <div class="diff">
-        <div class="diff-col">
+      <div class="diff rv anim">
+        <div class="diff-col usual">
           <h3>The usual approach</h3>
           <p class="sub">The AI only sees what the middle layer gives it.</p>
           <div class="stack">
             <div class="box ai"><svg class="ic" aria-hidden="true"><use href="#i-brain"/></svg>AI model</div>
-            <div class="arrow"></div>
+            <div class="arrow a1"><i class="pk"></i></div>
             <div class="box mid"><svg class="ic" aria-hidden="true"><use href="#i-tool"/></svg>Hand-written integration layer</div>
-            <div class="arrow"></div>
+            <div class="arrow a2"><i class="pk"></i></div>
             <div class="box hw"><svg class="ic" aria-hidden="true"><use href="#i-motor"/></svg>Motors, sensors, boards</div>
           </div>
           <ul>
@@ -394,7 +507,7 @@
           <p class="sub">The AI is connected to the hardware and can build it.</p>
           <div class="stack">
             <div class="box ai"><svg class="ic" aria-hidden="true"><use href="#i-brain"/></svg>AI model</div>
-            <div class="arrow two"></div>
+            <div class="arrow two"><i class="pk down"></i><i class="pk up"></i></div>
             <div class="box hw"><svg class="ic" aria-hidden="true"><use href="#i-motor"/></svg>Motors, sensors, boards</div>
           </div>
           <ul>
@@ -407,8 +520,14 @@
       </div>
 
       <div class="build">
-        <div class="build-row">
-          <svg class="ic ic-lg cap-ic" aria-hidden="true"><use href="#i-file-code"/></svg>
+        <div class="build-row rv anim">
+          <div class="mini m-code" aria-hidden="true">
+            <div class="y">esc_dshot600.c</div>
+            <div style="animation-delay:.5s"><span class="k">  probe bus</span>      <span class="ok">ok</span></div>
+            <div style="animation-delay:1s"><span class="k">  init 1000 Hz</span>   <span class="ok">ok</span></div>
+            <div style="animation-delay:1.5s"><span class="k">  arm + spin</span>     <span class="ok">ok</span></div>
+            <div style="animation-delay:2.1s">  bench test     <span class="ok">ok</span></div>
+          </div>
           <div>
             <h3>Builds the drivers</h3>
             <p>Give it a new motor controller, camera or IMU and it writes the driver, tests it on the bench and keeps it.</p>
@@ -419,8 +538,19 @@
             <li>Works with common boards and buses</li>
           </ul>
         </div>
-        <div class="build-row">
-          <svg class="ic ic-lg cap-ic" aria-hidden="true"><use href="#i-function"/></svg>
+
+        <div class="build-row rv anim">
+          <div class="mini" aria-hidden="true">
+            <svg viewBox="0 0 220 132">
+              <line x1="22" y1="112" x2="206" y2="112" stroke="#29405E"/>
+              <line x1="22" y1="14" x2="22" y2="112" stroke="#29405E"/>
+              <line x1="24" y1="44" x2="206" y2="44" stroke="#3E5C82" stroke-dasharray="3 4"/>
+              <path class="draw" pathLength="1" d="M24.0 105.1 L27.0 105.5 L30.1 104.2 L33.1 102.6 L36.1 97.0 L39.2 94.2 L42.2 81.1 L45.2 79.6 L48.3 78.3 L51.3 69.9 L54.3 66.5 L57.4 53.9 L60.4 51.9 L63.4 45.0 L66.5 43.2 L69.5 39.5 L72.5 30.9 L75.6 29.8 L78.6 27.9 L81.6 31.8 L84.7 29.1 L87.7 22.8 L90.7 28.2 L93.8 22.3 L96.8 27.0 L99.8 23.4 L102.9 23.4 L105.9 32.5 L108.9 28.0 L112.0 29.7 L115.0 38.3 L118.0 39.1 L121.1 35.6 L124.1 43.4 L127.1 41.3 L130.2 44.1 L133.2 41.2 L136.2 49.1 L139.3 48.0 L142.3 51.5 L145.3 51.6 L148.4 46.9 L151.4 48.0 L154.4 46.5 L157.5 46.5 L160.5 45.8 L163.5 47.8 L166.6 50.4 L169.6 44.7 L172.6 50.3 L175.7 46.8 L178.7 46.1 L181.7 50.2 L184.8 46.6 L187.8 44.5 L190.8 45.5 L193.9 47.0 L196.9 40.7 L199.9 48.5 L203.0 39.5 L206.0 45.7" fill="none" stroke="#9FD3FF" stroke-width="1.6"/>
+              <path class="draw" pathLength="1" d="M24.0 104.0 L27.0 103.3 L30.1 101.5 L33.1 98.6 L36.1 94.8 L39.2 90.4 L42.2 85.3 L45.2 79.9 L48.3 74.3 L51.3 68.6 L54.3 62.9 L57.4 57.4 L60.4 52.2 L63.4 47.3 L66.5 42.8 L69.5 38.8 L72.5 35.3 L75.6 32.3 L78.6 29.9 L81.6 28.0 L84.7 26.7 L87.7 25.9 L90.7 25.5 L93.8 25.5 L96.8 26.0 L99.8 26.8 L102.9 27.8 L105.9 29.1 L108.9 30.6 L112.0 32.3 L115.0 34.0 L118.0 35.8 L121.1 37.5 L124.1 39.2 L127.1 40.9 L130.2 42.5 L133.2 43.9 L136.2 45.2 L139.3 46.3 L142.3 47.3 L145.3 48.1 L148.4 48.7 L151.4 49.2 L154.4 49.5 L157.5 49.7 L160.5 49.7 L163.5 49.6 L166.6 49.4 L169.6 49.1 L172.6 48.7 L175.7 48.3 L178.7 47.8 L181.7 47.3 L184.8 46.7 L187.8 46.2 L190.8 45.7 L193.9 45.1 L196.9 44.6 L199.9 44.2 L203.0 43.8 L206.0 43.4" fill="none" stroke="#F5B700" stroke-width="1.8" style="animation-delay:1.2s"/>
+              <text class="fade" x="206" y="30" text-anchor="end" fill="#F5B700" style="animation-delay:2.4s">model fitted</text>
+              <text x="26" y="124" fill="#8297B0" style="font-size:9px">step response</text>
+            </svg>
+          </div>
           <div>
             <h3>Identifies the system</h3>
             <p>It runs its own experiments to learn mass, inertia, motor response and delays, then builds a model it can control.</p>
@@ -431,8 +561,19 @@
             <li>Controller tuning from the fitted model</li>
           </ul>
         </div>
-        <div class="build-row">
-          <svg class="ic ic-lg cap-ic hi" aria-hidden="true"><use href="#i-bug"/></svg>
+
+        <div class="build-row rv anim">
+          <div class="mini" aria-hidden="true">
+            <svg viewBox="0 0 220 132">
+              <line x1="22" y1="112" x2="206" y2="112" stroke="#29405E"/>
+              <path class="draw" pathLength="1" d="M20.0 74.0 L22.0 75.6 L24.0 77.2 L26.0 78.6 L28.0 79.7 L30.0 80.5 L32.0 80.9 L34.0 81.0 L36.0 80.6 L38.0 79.9 L40.0 78.9 L42.0 77.6 L44.0 76.1 L46.0 74.5 L48.0 72.8 L50.0 71.2 L52.0 69.8 L54.0 68.6 L56.0 67.7 L58.0 67.2 L60.0 67.0 L62.0 67.2 L64.0 67.8 L66.0 68.8 L68.0 70.0 L70.0 71.5 L72.0 73.1 L74.0 74.7 L76.0 76.3 L78.0 77.8 L80.0 79.1 L82.0 80.1 L84.0 80.7 L86.0 81.0 L88.0 80.9 L90.0 80.4 L92.0 79.5 L94.0 78.4 L96.0 77.0 L98.0 75.4 L100.0 73.7 L102.0 72.1 L104.0 70.6 L106.0 69.2 L108.0 68.2 L110.0 67.4 L112.0 67.0 L114.0 67.1 L116.0 67.4 L118.0 68.2 L120.0 91.3 L122.0 92.6 L124.0 94.2 L126.0 95.8 L128.0 97.4 L130.0 99.0 L132.0 100.4 L134.0 101.6 L136.0 102.4 L138.0 102.9 L140.0 103.0 L142.0 102.7 L144.0 102.0 L146.0 101.0 L148.0 99.8 L150.0 98.3 L152.0 96.7 L154.0 95.0 L156.0 93.4 L158.0 92.0 L160.0 90.7 L162.0 89.8 L164.0 89.2 L166.0 89.0 L168.0 89.2 L170.0 89.7 L172.0 90.6 L174.0 91.9 L176.0 93.3 L178.0 94.9 L180.0 96.5 L182.0 98.1 L184.0 99.6 L186.0 100.9 L188.0 102.0 L190.0 102.7 L192.0 103.0 L194.0 102.9 L196.0 102.5 L198.0 101.6 L200.0 100.5 L202.0 99.1 L204.0 97.6 L206.0 95.9" fill="none" stroke="#9FD3FF" stroke-width="1.5"/>
+              <circle class="ring" cx="120" cy="85" r="7" fill="none" stroke="#FF8A80" stroke-width="2" style="animation-delay:1.3s"/>
+              <circle class="fade" cx="120" cy="85" r="3.2" fill="#FF8A80" style="animation-delay:1.3s"/>
+              <text class="fade" x="26" y="30" fill="#FF8A80" style="animation-delay:1.6s">fault: IMU offset 0.8 rad</text>
+              <path class="draw" pathLength="1" d="M120.0 69.3 L122.0 70.6 L124.0 72.2 L126.0 73.8 L128.0 75.4 L130.0 77.0 L132.0 78.4 L134.0 79.6 L136.0 80.4 L138.0 80.9 L140.0 81.0 L142.0 80.7 L144.0 80.0 L146.0 79.0 L148.0 77.8 L150.0 76.3 L152.0 74.7 L154.0 73.0 L156.0 71.4 L158.0 70.0 L160.0 68.7 L162.0 67.8 L164.0 67.2 L166.0 67.0 L168.0 67.2 L170.0 67.7 L172.0 68.6 L174.0 69.9 L176.0 71.3 L178.0 72.9 L180.0 74.5 L182.0 76.1 L184.0 77.6 L186.0 78.9 L188.0 80.0 L190.0 80.7 L192.0 81.0 L194.0 80.9 L196.0 80.5 L198.0 79.6 L200.0 78.5 L202.0 77.1 L204.0 75.6 L206.0 73.9" fill="none" stroke="#46D17E" stroke-width="2" stroke-dasharray="4 3" style="animation-delay:2.2s"/>
+              <text class="fade" x="206" y="124" text-anchor="end" fill="#46D17E" style="animation-delay:2.9s">mount frame corrected</text>
+            </svg>
+          </div>
           <div>
             <h3>Debugs itself</h3>
             <p>When a sensor drifts, a motor stalls or a cable is wrong, the AI sees it in the raw data and works out the cause.</p>
@@ -450,9 +591,9 @@
   <!-- PROCESS -->
   <section id="process" class="white">
     <div class="wrap">
-      <h2>How a project runs</h2>
-      <p class="intro">Bring your vehicle, or let us build one. The AI does the bring-up, and your team watches every step.</p>
-      <div class="steps">
+      <h2 class="rv">How a project runs</h2>
+      <p class="intro rv">Bring your vehicle, or let us build one. The AI does the bring-up, and your team watches every step.</p>
+      <div class="steps rv anim">
         <div class="step">
           <h3>Connect</h3>
           <p>We plug the AI into your robot's boards, motors and sensors, with no custom layer in between.</p>
@@ -476,25 +617,33 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="wrap">
-    <div class="about-grid">
-      <h2>Built by people who write the control code and the drivers themselves.</h2>
-      <div class="col">
-        <p>AIXAutonomy is a physical AI company. We build general AI for robots that is connected to the hardware, so the AI can build, identify and debug the machine it runs on.</p>
-        <p>Our team comes from research in control systems, sensor fusion and machine learning for drones, spacecraft and underwater robots. We bring that work out of the lab and into real vehicles.</p>
+      <div class="about-grid">
+        <h2 class="rv">Built by people who write the control code and the drivers themselves.</h2>
+        <div class="col rv">
+          <p>AIXAutonomy is a physical AI company. We build general AI for robots that is connected to the hardware, so the AI can build, identify and debug the machine it runs on.</p>
+          <p>Our team comes from research in control systems, sensor fusion and machine learning for drones, spacecraft and underwater robots. We bring that work out of the lab and into real vehicles.</p>
+        </div>
       </div>
-    </div>
+      <div class="about-photo rv" data-img="images/lab.jpg">
+        <img alt="A quadrotor drone in flight" hidden>
+        <div class="fallback">Photo goes here (images/lab.jpg)</div>
+        <span class="tag">Flight test</span>
+      </div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact" class="contact">
     <div class="wrap contact-grid">
-      <div>
+      <div class="rv">
         <h2>Have a robot that needs a brain?</h2>
         <p>Tell us about the vehicle, the job and the timeline. We reply within two business days.</p>
-        <a class="mail" href="mailto:rpirayeshs@gmail.com?subject=Project%20inquiry">rpirayeshs@gmail.com</a>
+        <div class="mail-row">
+          <a class="mail" href="mailto:rpirayeshs@gmail.com?subject=Project%20inquiry">rpirayeshs@gmail.com</a>
+          <button class="copy" type="button" data-copy="rpirayeshs@gmail.com">Copy</button>
+        </div>
       </div>
-      <dl>
+      <dl class="rv">
         <dt>Company</dt><dd>AIXAutonomy LLC</dd>
         <dt>Email</dt><dd><a href="mailto:rpirayeshs@gmail.com">rpirayeshs@gmail.com</a></dd>
       </dl>
@@ -509,7 +658,23 @@
 </footer>
 
 <script>
-  // mobile menu
+window.addEventListener('error', () => document.querySelectorAll('.rv').forEach(el => el.classList.add('in', 'play')));
+(() => {
+  const html = document.documentElement;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const io = 'IntersectionObserver' in window;
+
+  /* ---------- hero entrance ---------- */
+  try {
+    const h1 = document.querySelector('.hero h1');
+    const words = h1.textContent.trim().split(/\s+/);
+    h1.innerHTML = words.map((w, i) => `<span class="w"><span style="--i:${i}">${w}</span></span>`).join(' ');
+    h1.classList.add('ready');
+  } catch (e) { document.querySelector('.hero h1').classList.add('ready'); }
+  requestAnimationFrame(() => requestAnimationFrame(() => html.classList.add('loaded')));
+
+  /* ---------- menu, year, photos ---------- */
   const btn = document.querySelector('.menu-btn');
   const menu = document.getElementById('menu');
   btn.addEventListener('click', () => {
@@ -521,7 +686,6 @@
   }));
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  // photos: load images/*.jpg if the file exists, otherwise keep the fallback
   document.querySelectorAll('[data-img]').forEach(el => {
     const img = el.querySelector('img');
     img.addEventListener('load', () => { img.hidden = false; el.classList.add('has-img'); });
@@ -529,64 +693,297 @@
     img.src = el.dataset.img;
   });
 
-  // hero console animation: the AI brings up an unknown drone
-  const LINES = [
-    [0, '<span class="k">$</span> connect --bus can0,usb', 0],
-    [0, 'found: 4x ESC (unknown model), IMU BMI088, GPS u-blox M9', 0],
-    [0, '<span class="y">no driver for ESC. reading protocol from bus traffic...</span>', 0],
-    [1, 'writing driver esc_dshot600.c ... compiled, bench test <span class="g">ok</span>', 1],
-    [1, 'writing driver imu_bmi088.c ... compiled, 1 kHz stream <span class="g">ok</span>', 1],
-    [2, 'identification: step inputs on motors 1-4, 12 s', 2],
-    [2, 'fit: mass 1.42 kg, Ixx 0.021, Iyy 0.023, motor tau 38 ms', 2],
-    [2, '<span class="r">fault: IMU y-axis offset 0.8 rad. mount rotated?</span>', 2],
-    [2, 'correcting mount frame in config... re-check <span class="g">ok</span>', 2],
-    [2, 'controller tuned from model. sim hover <span class="g">stable</span>', 2],
-    [3, '<span class="k">$</span> arm && takeoff 1.5m', 3],
-    [3, 'hover <span class="g">stable</span>. tracking error 3 cm. ready for mission.', 3],
-  ];
-  const log = document.getElementById('log');
-  const stages = Array.from(document.getElementById('stages').children);
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ---------- header, progress bar, parallax ---------- */
+  const header = document.querySelector('header');
+  const bar = document.querySelector('.progress i');
+  const band = document.querySelector('.about-photo img');
+  function parallax() {
+    if (!band || reduce) return;
+    const r = band.parentElement.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    const p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+    band.style.transform = `translateY(${(p * -40).toFixed(1)}px) scale(1.15)`;
+  }
+  let ticking = false;
+  function onScroll() {
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 8);
+    const max = html.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
+    parallax();
+  }
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { onScroll(); ticking = false; }); } }, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
 
-  function render(n){
-    log.innerHTML = '';
-    for (let i = 0; i < n; i++) {
-      const d = document.createElement('div');
-      d.innerHTML = LINES[i][1];
-      d.className = 'show';
-      log.appendChild(d);
-    }
-    const stage = n ? LINES[n - 1][2] : 0;
-    stages.forEach((s, i) => {
-      s.classList.toggle('done', i < stage || n === LINES.length);
-      s.classList.toggle('active', i === stage && n < LINES.length);
+  /* ---------- scroll spy ---------- */
+  const links = [...document.querySelectorAll('nav a[href^="#"]')];
+  const secs = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if (io) {
+    const spy = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+      });
+    }, { rootMargin: '-35% 0px -55% 0px' });
+    secs.forEach(s => spy.observe(s));
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  document.querySelectorAll('.stagger').forEach(g => [...g.children].forEach((c, i) => c.style.setProperty('--d', (i * 90) + 'ms')));
+  const rvs = [...document.querySelectorAll('.rv')];
+  const show = el => { el.classList.add('in'); if (el.classList.contains('anim')) el.classList.add('play'); };
+  if (reduce || !io) rvs.forEach(show);
+  else {
+    const obs = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { show(e.target); obs.unobserve(e.target); } });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    rvs.forEach(el => obs.observe(el));
+  }
+  // replay the mini visuals on hover
+  document.querySelectorAll('.build-row').forEach(row => {
+    row.addEventListener('mouseenter', () => {
+      if (reduce || !row.classList.contains('in')) return;
+      row.classList.remove('play'); void row.offsetWidth; row.classList.add('play');
+    });
+  });
+
+  /* ---------- platform card tilt ---------- */
+  if (hoverable && !reduce) {
+    document.querySelectorAll('.platform').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
+        card.style.transition = 'transform .12s ease, box-shadow .5s';
+        card.style.transform = `perspective(900px) rotateX(${(-ny * 7).toFixed(2)}deg) rotateY(${(nx * 7).toFixed(2)}deg) translateY(-4px)`;
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.transition = 'transform .6s cubic-bezier(.2,.7,.2,1), box-shadow .5s';
+        card.style.transform = '';
+      });
     });
   }
 
-  if (reduce) {
-    render(LINES.length);
-  } else {
-    let i = 0;
-    function tick(){
-      if (i < LINES.length) {
-        const d = document.createElement('div');
-        d.innerHTML = LINES[i][1];
-        log.appendChild(d);
-        requestAnimationFrame(() => d.classList.add('show'));
-        const stage = LINES[i][2];
-        stages.forEach((s, k) => {
-          s.classList.toggle('done', k < stage);
-          s.classList.toggle('active', k === stage);
-        });
-        i++;
-        setTimeout(tick, 1300);
-      } else {
-        stages.forEach(s => { s.classList.add('done'); s.classList.remove('active'); });
-        setTimeout(() => { i = 0; log.innerHTML = ''; tick(); }, 5000);
-      }
+  /* ---------- copy email ---------- */
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
+    const t = b.dataset.copy;
+    try { await navigator.clipboard.writeText(t); }
+    catch (e) {
+      const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (_) {}
+      ta.remove();
     }
-    tick();
-  }
+    b.textContent = 'Copied'; b.classList.add('done');
+    setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('done'); }, 1800);
+  }));
+
+  /* ---------- console: typewriter with clickable stages ---------- */
+  try {
+    const LINES = [
+      { s: 0, seg: [['$ ', 'k'], ['connect --bus can0,usb', '']] },
+      { s: 0, seg: [['found: 4x ESC (unknown model), IMU BMI088, GPS u-blox M9', '']] },
+      { s: 0, seg: [['no driver for ESC. reading protocol from bus traffic...', 'y']], pause: 700 },
+      { s: 1, seg: [['writing driver esc_dshot600.c ... compiled, bench test ', ''], ['ok', 'g']] },
+      { s: 1, seg: [['writing driver imu_bmi088.c ... compiled, 1 kHz stream ', ''], ['ok', 'g']] },
+      { s: 2, seg: [['identification: step inputs on motors 1-4, 12 s', '']], pause: 900 },
+      { s: 2, seg: [['fit: mass 1.42 kg, Ixx 0.021, Iyy 0.023, motor tau 38 ms', '']] },
+      { s: 2, seg: [['fault: IMU y-axis offset 0.8 rad. mount rotated?', 'r']], pause: 700 },
+      { s: 2, seg: [['correcting mount frame in config... re-check ', ''], ['ok', 'g']] },
+      { s: 2, seg: [['controller tuned from model. sim hover ', ''], ['stable', 'g']] },
+      { s: 3, seg: [['$ ', 'k'], ['arm && takeoff 1.5m', '']], pause: 800 },
+      { s: 3, seg: [['hover ', ''], ['stable', 'g'], ['. tracking error 3 cm. ready for mission.', '']] },
+    ];
+    const log = document.getElementById('log');
+    const con = document.getElementById('console');
+    const stageBtns = [...document.querySelectorAll('#stages button')];
+    const cur = document.createElement('span'); cur.className = 'cur';
+    let li = 0, si = 0, ci = 0, lineEl = null, segEl = null, timer = null, waiting = false, visible = true;
+    const active = () => visible && !document.hidden;
+    const setStage = n => stageBtns.forEach((b, i) => { b.classList.toggle('done', i < n || n > 3); b.classList.toggle('active', i === n); });
+    const newLine = () => { const d = document.createElement('div'); d.className = 'ln'; log.appendChild(d); d.appendChild(cur); log.scrollTop = log.scrollHeight; return d; };
+    const renderLine = L => { const d = document.createElement('div'); d.className = 'ln'; L.seg.forEach(([t, c]) => { const s = document.createElement('span'); if (c) s.className = c; s.textContent = t; d.appendChild(s); }); log.appendChild(d); };
+    function schedule(ms) { timer = setTimeout(() => { timer = null; step(); }, ms); }
+    function step() {
+      if (!active()) { waiting = true; return; }
+      if (li >= LINES.length) { setStage(4); schedule(6000); li = -1; return; }
+      if (li < 0) { log.innerHTML = ''; li = 0; }
+      const L = LINES[li];
+      if (!lineEl) { lineEl = newLine(); setStage(L.s); }
+      const seg = L.seg[si];
+      if (!segEl) { segEl = document.createElement('span'); if (seg[1]) segEl.className = seg[1]; lineEl.insertBefore(segEl, cur); }
+      if (ci < seg[0].length) { segEl.textContent += seg[0][ci++]; schedule(13); return; }
+      segEl = null; ci = 0; si++;
+      if (si < L.seg.length) { schedule(0); return; }
+      si = 0; lineEl = null; li++;
+      schedule(L.pause || 420);
+    }
+    function jump(stage) {
+      if (timer) { clearTimeout(timer); timer = null; }
+      waiting = false; log.innerHTML = '';
+      let idx = LINES.findIndex(l => l.s === stage); if (idx < 0) idx = 0;
+      for (let i = 0; i < idx; i++) renderLine(LINES[i]);
+      li = idx; si = 0; ci = 0; lineEl = null; segEl = null;
+      setStage(stage); step();
+    }
+    stageBtns.forEach(b => b.addEventListener('click', () => jump(+b.dataset.stage)));
+    document.getElementById('replay').addEventListener('click', () => jump(0));
+    document.addEventListener('visibilitychange', () => { if (active() && waiting) { waiting = false; step(); } });
+    if (reduce) { LINES.forEach(renderLine); setStage(4); }
+    else if (io) {
+      new IntersectionObserver(es => es.forEach(e => {
+        visible = e.isIntersecting;
+        if (visible && waiting) { waiting = false; step(); }
+      }), { threshold: 0.2 }).observe(con);
+      step();
+    } else step();
+  } catch (e) { console.error(e); }
+
+  /* ---------- hero digital twin (canvas) ---------- */
+  try {
+    const stage = document.getElementById('twin-stage');
+    const cv = document.getElementById('twin');
+    const ctx = cv.getContext('2d');
+    const out = { roll: document.getElementById('t-roll'), pitch: document.getElementById('t-pitch'), rpm: document.getElementById('t-rpm'), pts: document.getElementById('t-pts') };
+    let W = 0, H = 0, running = false;
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = stage.clientWidth; H = stage.clientHeight;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    let lastT = 0, lastPos = { x: 0, y: 0, z: 1.25 };
+    resize(); addEventListener('resize', () => { resize(); if (!running) draw(lastT, lastPos); });
+
+    const cam = { dist: 5.6, elev: 0.5, yaw: 0.6, look: 0.6 };
+    function proj(x, y, z) {
+      const cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw);
+      const rx = x * cy - y * sy, ry = x * sy + y * cy, rz = z - cam.look;
+      const ce = Math.cos(cam.elev), se = Math.sin(cam.elev);
+      const d = cam.dist + ry * ce - rz * se;
+      const v = ry * se + rz * ce;
+      const F = H * 2.35;
+      return [W / 2 + rx * F / d, H / 2 - v * F / d, d];
+    }
+    function line(a, b, color, w) {
+      const p = proj(a[0], a[1], a[2]), q = proj(b[0], b[1], b[2]);
+      if (p[2] < .5 || q[2] < .5) return;
+      ctx.strokeStyle = color; ctx.lineWidth = w || 1;
+      ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); ctx.stroke();
+    }
+    function poly(pts, color, w) {
+      ctx.strokeStyle = color; ctx.lineWidth = w || 1; ctx.beginPath();
+      pts.forEach((p, i) => { const s = proj(p[0], p[1], p[2]); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); });
+      ctx.closePath(); ctx.stroke();
+    }
+    // drone geometry (body frame: x forward, y left, z up)
+    const A = 0.78, R = 0.4;
+    const arms = [[A, A], [A, -A], [-A, -A], [-A, A]];
+    const box = [[-.3, -.2, -.08], [.3, -.2, -.08], [.3, .2, -.08], [-.3, .2, -.08], [-.3, -.2, .12], [.3, -.2, .12], [.3, .2, .12], [-.3, .2, .12]];
+    const edges = [[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], [2, 6], [3, 7]];
+    const legs = [[[.22, .16, -.08], [.3, .26, -.5]], [[.22, -.16, -.08], [.3, -.26, -.5]], [[-.22, .16, -.08], [-.3, .26, -.5]], [[-.22, -.16, -.08], [-.3, -.26, -.5]]];
+    const skids = [[[.5, .26, -.5], [-.5, .26, -.5]], [[.5, -.26, -.5], [-.5, -.26, -.5]]];
+    const disc = Array.from({ length: 28 }, (_, i) => { const t = i / 28 * Math.PI * 2; return [Math.cos(t) * R, Math.sin(t) * R]; });
+    const att = { r: 0, p: 0 }, tgt = { r: 0, p: 0 };
+    function body(p, pos) {
+      const cr = Math.cos(att.r), sr = Math.sin(att.r), cp = Math.cos(att.p), sp = Math.sin(att.p);
+      const y1 = p[1] * cr - p[2] * sr, z1 = p[1] * sr + p[2] * cr, x1 = p[0];
+      return [x1 * cp + z1 * sp + pos.x, y1 + pos.y, -x1 * sp + z1 * cp + pos.z];
+    }
+    // lidar point cloud: a wall, a pole, a crate, ground returns
+    const pts = [];
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const add = (x, y, z) => pts.push({ x, y, z, a: 0, ang: Math.atan2(y, x) });
+    for (let i = 0; i < 120; i++) { const t = Math.random(); add(-2.6 + 3.1 * t + rnd(-.03, .03), 1.7 + 0.9 * t + rnd(-.03, .03), rnd(0, 1.1)); }
+    for (let i = 0; i < 30; i++) add(2.3 + rnd(-.05, .05), -0.7 + rnd(-.05, .05), rnd(0, 1.7));
+    for (let i = 0; i < 90; i++) {
+      const f = Math.random(), s = .9, bx = -1.7, by = -1.7;
+      if (f < .4) add(bx + rnd(-s / 2, s / 2), by + rnd(-s / 2, s / 2), .7);
+      else if (f < .7) add(bx + s / 2, by + rnd(-s / 2, s / 2), rnd(0, .7));
+      else add(bx + rnd(-s / 2, s / 2), by + s / 2, rnd(0, .7));
+    }
+    for (let i = 0; i < 80; i++) { const r = rnd(.7, 3.2), t = rnd(0, Math.PI * 2); add(Math.cos(t) * r, Math.sin(t) * r, 0.01); }
+
+    let sweep = 0, last = null, raf = 0, hover = false, hx = 0, hy = 0, uiT = 0;
+    const t0 = performance.now();
+    stage.addEventListener('pointermove', e => {
+      const r = stage.getBoundingClientRect();
+      hx = (e.clientX - r.left) / r.width - .5; hy = (e.clientY - r.top) / r.height - .5;
+      hover = true; stage.classList.add('touched');
+    });
+    stage.addEventListener('pointerleave', () => { hover = false; });
+
+    function draw(t, pos) {
+      lastT = t; lastPos = pos;
+      ctx.clearRect(0, 0, W, H);
+      for (let i = -3; i <= 3; i += .5) {
+        const al = .3 - Math.abs(i) * .035;
+        line([i, -3, 0], [i, 3, 0], `rgba(62,92,130,${al})`, 1);
+        line([-3, i, 0], [3, i, 0], `rgba(62,92,130,${al})`, 1);
+      }
+      for (let k = 10; k >= 0; k--) {
+        const s = sweep - k * .035, al = (1 - k / 11) * .55;
+        line([0, 0, .005], [Math.cos(s) * 3.2, Math.sin(s) * 3.2, .005], `rgba(245,183,0,${al})`, k ? 1 : 1.5);
+      }
+      for (const p of pts) {
+        if (p.a < .03) continue;
+        const s = proj(p.x, p.y, p.z); if (s[2] < .5) continue;
+        ctx.fillStyle = `rgba(159,211,255,${Math.min(1, p.a)})`;
+        ctx.fillRect(s[0] - 1.2, s[1] - 1.2, 2.4, 2.4);
+      }
+      ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.beginPath();
+      disc.forEach(([x, y], i) => { const s = proj(x * 1.7 + pos.x, y * 1.7 + pos.y, .01); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); });
+      ctx.closePath(); ctx.fill();
+      const B = p => body(p, pos), fc = 'rgba(222,232,242,.95)', fl = 'rgba(222,232,242,.65)';
+      arms.forEach(([x, y]) => { line(B([0, 0, 0]), B([x, y, 0]), fc, 2); line(B([x, y, 0]), B([x, y, .1]), fc, 2); });
+      edges.forEach(([i, j]) => line(B(box[i]), B(box[j]), fc, 1.5));
+      legs.forEach(([p, q]) => line(B(p), B(q), fl, 1.2));
+      skids.forEach(([p, q]) => line(B(p), B(q), fl, 1.2));
+      line(B([.3, 0, -.1]), B([.42, 0, -.24]), fc, 2);
+      line(B([.3, 0, .12]), B([.55, 0, .12]), 'rgba(245,183,0,.95)', 2);
+      arms.forEach(([x, y], k) => {
+        poly(disc.map(([dx, dy]) => B([x + dx, y + dy, .1])), 'rgba(245,183,0,.35)', 1);
+        const ang = t * 26 * (k % 2 ? 1 : -1) + k * 1.3;
+        for (let b = 0; b < 2; b++) { const a2 = ang + b * Math.PI; line(B([x, y, .1]), B([x + Math.cos(a2) * R * .95, y + Math.sin(a2) * R * .95, .1]), 'rgba(245,183,0,.9)', 2); }
+      });
+      const g = ctx.createRadialGradient(W / 2, H * .55, H * .25, W / 2, H * .55, H * .95);
+      g.addColorStop(0, 'rgba(10,23,41,0)'); g.addColorStop(1, 'rgba(10,23,41,.96)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    }
+    function frame(now) {
+      if (!running) return;
+      const dt = last ? Math.min(.05, (now - last) / 1000) : .016; last = now;
+      const t = (now - t0) / 1000;
+      if (hover) { tgt.r = hx * .55; tgt.p = hy * .45; } else { tgt.r = .09 * Math.sin(t * .7); tgt.p = .07 * Math.sin(t * .5 + 1.2); }
+      att.r += (tgt.r - att.r) * Math.min(1, dt * 6); att.p += (tgt.p - att.p) * Math.min(1, dt * 6);
+      cam.yaw = .6 + t * .1;
+      const pos = { x: .5 * att.p, y: -.5 * att.r, z: 1.25 + .05 * Math.sin(t * 1.3) };
+      const prev = sweep; sweep = (sweep + dt * 1.6) % (Math.PI * 2);
+      const ds = (sweep - prev + Math.PI * 2) % (Math.PI * 2);
+      let count = 0;
+      for (const p of pts) { const dA = (p.ang - prev + Math.PI * 2) % (Math.PI * 2); if (dA < ds) p.a = 1; else p.a *= Math.pow(.35, dt); if (p.a > .04) count++; }
+      draw(t, pos);
+      if (now - uiT > 100) {
+        uiT = now;
+        out.roll.textContent = (att.r * 57.3).toFixed(1) + '°';
+        out.pitch.textContent = (att.p * 57.3).toFixed(1) + '°';
+        out.rpm.textContent = (Math.round((5400 + 1400 * (Math.abs(att.r) + Math.abs(att.p))) / 10) * 10) + ' rpm';
+        out.pts.textContent = count;
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    function start() { if (running || reduce) return; running = true; last = null; raf = requestAnimationFrame(frame); }
+    function stop() { running = false; cancelAnimationFrame(raf); }
+    if (reduce) {
+      pts.forEach(p => { p.a = Math.random() < .6 ? rnd(.3, 1) : 0; });
+      draw(0, { x: 0, y: 0, z: 1.25 });
+      out.pts.textContent = pts.filter(p => p.a > .04).length;
+    } else {
+      let inView = true;
+      if (io) new IntersectionObserver(es => es.forEach(e => { inView = e.isIntersecting; inView && !document.hidden ? start() : stop(); }), { threshold: .05 }).observe(stage);
+      document.addEventListener('visibilitychange', () => { document.hidden ? stop() : (inView && start()); });
+      start();
+    }
+  } catch (e) { console.error(e); }
+})();
 </script>
 </body>
 </html>
